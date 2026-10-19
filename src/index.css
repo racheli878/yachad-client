@@ -1,111 +1,326 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+/* =============================================================
+   יחד – קובץ העיצוב בגרסת Tailwind CSS (גרסה 4)
+   -------------------------------------------------------------
+   התקנה (פעם אחת):
+   1. בטרמינל, בתיקיית הלקוח:
+        npm install tailwindcss @tailwindcss/vite
+   2. ב-vite.config.ts להוסיף את tailwindcss() לרשימת ה-plugins
+      (ההוראות המלאות בהודעה בצ'אט).
+   3. לשים את הקובץ הזה בתיקייה src בשם index.css (במקום הקיים),
+      ולרוקן את src/App.css.
+   4. ב-index.html: בתגית <html> להוסיף lang="he" dir="rtl",
+      ובתוך <head> את שורת הגופנים:
+      <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Secular+One&display=swap" rel="stylesheet">
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+   שימוש:
+   - המחלקות המוכנות (btn, card, tag...) עובדות כמו בגרסה הרגילה.
+   - אפשר לשלב איתן מחלקות של Tailwind, למשל mt-4 או hidden.
+   - הצבעים זמינים גם כמחלקות Tailwind: bg-primary, text-ink,
+     border-line, bg-accent-soft, text-muted וכו'.
+   - מחלקות Tailwind גוברות על המחלקות המוכנות, כך שאפשר
+     "לתקן" פרט קטן במקום.
+   ============================================================= */
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "tailwindcss";
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+/* ---------- 1. צבעים, גופנים ועיגולי פינות ---------- */
+@theme {
+  --color-ink: #14302b;          /* ירוק כהה – טקסט ראשי, רקעים כהים */
+  --color-ink-2: #1f3f39;        /* משבצות על רקע כהה */
+  --color-ink-3: #2c4a44;        /* תגיות על רקע כהה */
+  --color-primary: #1f6f63;      /* ירוק – כפתור ראשי, קישורים */
+  --color-primary-soft: #e3f0ec; /* רקע ירוק בהיר */
+  --color-primary-text: #14544a; /* טקסט על רקע ירוק בהיר */
+  --color-accent: #f2a93b;       /* צהוב זעפרן – הדגשה */
+  --color-accent-soft: #fdf0d9;  /* רקע צהוב בהיר */
+  --color-accent-text: #7a4b00;  /* טקסט על רקע צהוב בהיר */
+  --color-bg: #f5f7f4;           /* רקע כללי של הדף */
+  --color-surface: #ffffff;      /* רקע כרטיסים */
+  --color-muted: #3e5a54;        /* טקסט משני */
+  --color-muted-on-dark: #bfd6cf;/* טקסט משני על רקע כהה */
+  --color-line: #dce3de;         /* מסגרות וקווים */
+  --color-input-line: #c9d4ce;   /* מסגרת שדות קלט */
+  --color-subtle: #eef2ef;       /* רקע אפור עדין */
+  --color-danger: #b4462f;       /* שגיאה – מסגרת */
+  --color-danger-text: #9a3a26;  /* שגיאה – טקסט */
+  --color-danger-soft: #f8e3dd;  /* שגיאה – רקע */
+
+  --font-display: 'Secular One', 'Assistant', sans-serif;
+  --font-sans: 'Assistant', system-ui, sans-serif;
+
+  --radius-field-sm: 12px;
+  --radius-field: 14px;
+  --radius-card: 26px;
+
+  --animate-spin: spin .8s linear infinite;
+}
+
+/* ---------- 2. בסיס ---------- */
+@layer base {
+  html { direction: rtl; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
   }
+
+  h1, h2, h3, h4 { line-height: 1.15; }
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); }
+  h2 { font-size: 24px; font-weight: 800; }
+  h3 { font-size: 20px; font-weight: 800; }
+
+  a { color: var(--color-primary); font-weight: 700; }
+  a:hover { color: var(--color-ink); }
+
+  button:not(:disabled), [role='button']:not(:disabled) { cursor: pointer; }
+
+  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+/* container של Tailwind מוחלף בגרסה שלנו: רוחב מרבי 1200px ושוליים מהצדדים */
+@utility container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 40px;
+  @media (max-width: 640px) { padding-inline: 16px; }
+}
+
+/* ---------- רכיבים מוכנים ---------- */
+@layer components {
+  /* מספרים, מיילים וטלפונים בתוך טקסט עברי */
+  .ltr { direction: ltr; unicode-bidi: embed; text-align: right; }
+
+  /* ---------- 3. פריסה ---------- */
+  .container-narrow { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 40px; }
+  .page { padding-top: 36px; padding-bottom: 64px; display: flex; flex-direction: column; gap: 24px; }
+
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  .stack-sm { display: flex; flex-direction: column; gap: 8px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .row-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+
+  /* שני טורים: תוכן ראשי רחב + צד. בטלפון נערמים אחד מתחת לשני */
+  .two-cols { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  .two-cols > .main { flex: 999 1 560px; min-width: 0; }
+  .two-cols > .side { flex: 1 1 300px; min-width: 0; }
+
+  /* רשת כרטיסים שמסתדרת לבד לפי הרוחב */
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .grid-form .full { grid-column: 1 / -1; }
+
+  .muted { color: var(--color-muted); }
+  .small { font-size: 15px; }
+  .page-title-sub { color: var(--color-muted); font-size: 18px; margin-top: 4px; }
+
+  /* ---------- 4. כותרת עליונה (Header) ---------- */
+  .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-line); }
+  .app-header-inner { max-width: 1200px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-ink); }
+  .logo-mark { width: 36px; height: 36px; border-radius: 11px; background: var(--color-ink); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); }
+  .logo-text { font-family: var(--font-display); font-size: 26px; }
+
+  .nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .nav-link { text-decoration: none; font-weight: 600; padding: 10px 14px; border-radius: 10px; color: var(--color-muted); display: flex; align-items: center; gap: 6px; }
+  .nav-link:hover { color: var(--color-ink); background: var(--color-subtle); }
+  /* NavLink של React Router מוסיף לבד את המחלקה active לקישור הפעיל */
+  .nav-link.active { font-weight: 800; background: var(--color-primary-soft); color: var(--color-ink); }
+
+  .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-soft); color: var(--color-accent-text); font-weight: 800; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none; }
+  .avatar-green { background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .avatar-lg { width: 84px; height: 84px; font-size: 32px; font-family: var(--font-display); background: var(--color-accent); color: var(--color-ink); }
+
+  /* ---------- 5. כפתורים ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 44px; padding: 11px 22px;
+    border: 2px solid transparent; border-radius: var(--radius-full);
+    font-weight: 800; text-decoration: none; cursor: pointer;
+    transition: filter .15s, background .15s;
   }
+  .btn:disabled, .btn[aria-disabled='true'] { opacity: .55; cursor: not-allowed; }
+  .btn-primary { background: var(--color-primary); color: #fff; }
+  .btn-primary:hover:not(:disabled) { filter: brightness(1.08); color: #fff; }
+  .btn-accent { background: var(--color-accent); color: var(--color-ink); }
+  .btn-accent:hover:not(:disabled) { filter: brightness(1.05); color: var(--color-ink); }
+  .btn-dark { background: var(--color-ink); color: #fff; }
+  .btn-outline { background: transparent; border-color: var(--color-ink); color: var(--color-ink); }
+  .btn-ghost { background: var(--color-surface); border-color: var(--color-input-line); color: var(--color-muted); font-weight: 700; }
+  .btn-danger { background: var(--color-surface); border-color: #e3b8ac; color: var(--color-danger-text); font-weight: 700; }
+  .btn-link { background: none; border: 0; padding: 10px 4px; color: var(--color-primary); }
+  .btn-lg { padding: 15px 32px; font-size: 18px; }
+  .btn-sm { padding: 8px 14px; min-height: 40px; font-size: 15px; }
+  .btn-block { width: 100%; }
+  .btn-dashed { background: transparent; border: 2px dashed #9aaea8; border-radius: 18px; color: var(--color-ink); }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  /* כפתור עם אייקון בלבד – חובה aria-label */
+  .icon-btn { width: 44px; height: 44px; border: 0; border-radius: var(--radius-field-sm); background: var(--color-bg); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--color-muted); }
+  .icon-btn:hover { background: var(--color-subtle); }
+
+  /* ---------- 6. כרטיסים ---------- */
+  .card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: 26px; display: flex; flex-direction: column; gap: 16px; }
+  .card-dark { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+  .card-dark .muted { color: var(--color-muted-on-dark); }
+  .card-accent { background: var(--color-accent-soft); border-color: transparent; }
+  .card-green { background: var(--color-primary-soft); border-color: transparent; }
+  .card-highlight { border: 2.5px solid var(--color-accent); }
+  .card-tight { padding: 18px 20px; gap: 10px; border-radius: 22px; }
+
+  /* כרטיס מפגש ברשימה */
+  .event-card { text-decoration: none; color: var(--color-ink); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
+  .event-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20, 48, 43, .08); color: var(--color-ink); }
+  .event-card-band { padding: 20px 22px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; background: var(--color-primary-soft); }
+  .event-card-band.dark { background: var(--color-ink); color: #fff; }
+  .event-card-band.accent { background: var(--color-accent); }
+  .event-card-band.gray { background: var(--color-subtle); color: var(--color-muted); }
+  .event-card-kind { font-size: 14px; font-weight: 700; opacity: .85; }
+  .event-card-title { font-family: var(--font-display); font-size: 24px; }
+  .event-card-body { padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 10px; color: var(--color-muted); }
+
+  /* משבצת סיכום (מספר גדול) בדף הבית */
+  .stat { border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; }
+  .stat-number { font-family: var(--font-display); font-size: 52px; line-height: 1; }
+
+  /* שורה ברשימה (מפגש קרוב, תפקיד, הוצאה) */
+  .list-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; background: var(--color-bg); text-decoration: none; color: var(--color-ink); }
+  .list-row.free { background: var(--color-surface); border: 2px dashed var(--color-input-line); }
+  .list-row .grow { flex: 1 1 200px; min-width: 0; }
+  .list-row-title { font-weight: 800; font-size: 18px; }
+  .divider { height: 1px; background: #e6ece8; border: 0; margin: 0; }
+
+  /* תאריך בריבוע */
+  .date-box { width: 64px; height: 64px; border-radius: 16px; background: var(--color-ink); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+  .date-box-day { font-family: var(--font-display); font-size: 24px; line-height: 1; }
+  .date-box-month { font-size: 13px; }
+  .date-box.empty { background: transparent; border: 2px dashed #9aaea8; color: var(--color-muted); font-size: 13px; font-weight: 700; text-align: center; }
+
+  /* ---------- 7. תגיות (סטטוס, תפקיד) ---------- */
+  .tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: var(--radius-full); font-size: 14px; font-weight: 700; white-space: nowrap; background: var(--color-subtle); color: var(--color-muted); }
+  .tag-organizer, .tag-pending, .tag-planning { background: var(--color-accent-soft); color: var(--color-accent-text); }
+  .tag-participant, .tag-accepted, .tag-scheduled { background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .tag-completed, .tag-declined { background: var(--color-subtle); color: var(--color-muted); }
+  .tag-cancelled, .tag-error { background: var(--color-danger-soft); color: var(--color-danger-text); }
+  .tag-solid { background: var(--color-accent); color: var(--color-ink); font-weight: 800; }
+  .badge { background: var(--color-accent); color: var(--color-ink); font-weight: 800; font-size: 13px; border-radius: var(--radius-full); padding: 1px 8px; }
+
+  /* ---------- 8. טפסים ---------- */
+  .field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; }
+  .field-hint { font-weight: 400; font-size: 14px; color: var(--color-muted); }
+  .input, .select, .textarea {
+    width: 100%; padding: 13px 16px;
+    border: 1.5px solid var(--color-input-line); border-radius: var(--radius-field);
+    background: var(--color-surface); font-weight: 400; color: var(--color-ink);
   }
-}
+  .textarea { resize: vertical; min-height: 96px; }
+  .input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(31, 111, 99, .18); }
+  .input::placeholder, .textarea::placeholder { color: #7d918b; }
+  .input.optional { border-style: dashed; border-color: #9aaea8; }
+  .input.filled { border: 2px solid var(--color-primary); background: var(--color-primary-soft); }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+  /* שגיאה: הוסיפי aria-invalid="true" לשדה, ומתחתיו <span class="field-error"> */
+  .input[aria-invalid='true'], .select[aria-invalid='true'], .textarea[aria-invalid='true'] { border: 2px solid var(--color-danger); }
+  .field-error { color: var(--color-danger-text); font-weight: 600; font-size: 15px; }
 
-body {
-  margin: 0;
-}
+  .check { display: flex; align-items: center; gap: 10px; font-weight: 700; min-height: 44px; cursor: pointer; }
+  .check input { width: 20px; height: 20px; accent-color: var(--color-primary); }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
+  /* תשובה בסקר / בחירת סטטוס – תיבה שלמה שלוחצים עליה */
+  .choice { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; border: 1.5px solid var(--color-line); background: var(--color-surface); font-weight: 700; cursor: pointer; min-height: 44px; }
+  .choice input { width: 22px; height: 22px; accent-color: var(--color-primary); }
+  .choice:has(input:checked) { border: 2px solid var(--color-primary); background: var(--color-primary-soft); }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  /* פס פילטרים */
+  .filters { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 22px; padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+  .filters > * { flex: 1 1 150px; }
+  .filters .search { flex: 2 1 260px; }
+
+  /* כפתורי בחירה צמודים (הכל / קרובים / שעברו) */
+  .segmented { display: inline-flex; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-full); padding: 4px; }
+  .segmented button { border: 0; background: transparent; color: var(--color-muted); font-weight: 700; padding: 10px 18px; border-radius: var(--radius-full); cursor: pointer; }
+  .segmented button[aria-pressed='true'] { background: var(--color-ink); color: #fff; font-weight: 800; }
+
+  /* ---------- 9. דף מפגש: אזור עליון כהה ולשוניות ---------- */
+  .event-hero { background: var(--color-ink); color: #fff; }
+  .event-hero-inner { max-width: 1200px; margin: 0 auto; padding: 32px 40px 0; display: flex; flex-direction: column; gap: 22px; }
+  .event-hero h1 { font-size: clamp(30px, 4vw, 48px); }
+  .event-hero .muted { color: var(--color-muted-on-dark); }
+  .event-hero .tag { background: var(--color-ink-3); color: #dcebe6; }
+  .event-hero .tag-solid { background: var(--color-accent); color: var(--color-ink); }
+
+  .info-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .info-tile { background: var(--color-ink-2); border-radius: 18px; padding: 16px 18px; }
+  .info-tile-label { color: var(--color-muted-on-dark); font-size: 14px; font-weight: 700; }
+  .info-tile-value { font-weight: 800; font-size: 19px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tab { text-decoration: none; font-weight: 700; padding: 14px 20px; color: #dcebe6; border-radius: 16px 16px 0 0; }
+  .tab:hover { color: #fff; }
+  .tab.active { background: var(--color-bg); color: var(--color-ink); font-weight: 800; }
+
+  /* ---------- 10. אשף: מחוון שלבים ---------- */
+  .stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .step { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--color-muted); }
+  .step-num { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #9aaea8; display: flex; align-items: center; justify-content: center; }
+  .step.done { color: var(--color-primary); }
+  .step.done .step-num { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+  .step.current { color: var(--color-ink); font-weight: 800; }
+  .step.current .step-num { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-ink); }
+  .step-line { flex: 1 1 40px; height: 3px; background: var(--color-line); border-radius: 2px; }
+  .step-line.done { background: var(--color-primary); }
+
+  /* ---------- 11. פסי התקדמות (סקר ותקציב) ---------- */
+  /* את רוחב ה-bar-fill קובעים לפי האחוז שמגיע מהשרת (percentage) */
+  .bar { height: 14px; background: var(--color-subtle); border-radius: 7px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 7px; background: #8fc1b5; }
+  .bar-fill.top { background: var(--color-accent); }
+  .bar-fill.dark { background: var(--color-ink); }
+  .bar-fill.over { background: var(--color-danger); }
+
+  /* ---------- 12. טבלה ---------- */
+  .table-wrap { overflow-x: auto; }
+  .table { width: 100%; border-collapse: collapse; min-width: 560px; text-align: right; }
+  .table th { padding: 12px; border-bottom: 2px solid var(--color-line); color: var(--color-muted); font-size: 15px; font-weight: 700; }
+  .table td { padding: 14px 12px; border-bottom: 1px solid #e6ece8; vertical-align: top; }
+  .table tbody th { font-weight: 800; color: var(--color-ink); font-size: 17px; }
+
+  /* ---------- 13. הודעות ומצבים ---------- */
+  .alert { border-radius: 16px; padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; }
+  .alert-info { background: var(--color-primary-soft); }
+  .alert-warning { background: var(--color-accent-soft); }
+  .alert-error { background: var(--color-danger-soft); color: var(--color-danger-text); font-weight: 600; }
+  .alert-success { background: var(--color-primary-soft); color: var(--color-primary-text); font-weight: 700; }
+
+  /* רשימה ריקה */
+  .empty { border: 2px dashed var(--color-input-line); border-radius: 24px; padding: 32px 22px; text-align: center; color: var(--color-muted); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+  /* טעינה */
+  .loading { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 48px 16px; color: var(--color-muted); font-weight: 700; }
+  .spinner { width: 28px; height: 28px; border: 3px solid var(--color-line); border-top-color: var(--color-primary); border-radius: 50%; animation: spin .8s linear infinite; }
+
+  /* חלון אישור (מחיקה / עזיבה) */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(20, 48, 43, .45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+  .modal { background: var(--color-surface); border-radius: var(--radius-card); padding: 28px; width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 50px rgba(20, 48, 43, .25); }
+
+  /* ---------- 14. מסכי כניסה (התחברות / הרשמה) ---------- */
+  .auth-layout { min-height: 100vh; display: flex; flex-wrap: wrap; }
+  .auth-side { flex: 1 1 420px; background: var(--color-ink); color: #fff; padding: 56px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+  .auth-side .muted { color: var(--color-muted-on-dark); }
+  .auth-main { flex: 999 1 560px; min-width: 0; padding: 56px 40px; display: flex; align-items: center; justify-content: center; }
+  .auth-card { width: 100%; max-width: 460px; }
+
+  /* ---------- 15. טלפון ---------- */
+  @media (max-width: 640px) {
+    .container-narrow, .app-header-inner, .event-hero-inner { padding-left: 16px; padding-right: 16px; }
+    .card { padding: 20px; }
+    .auth-side { padding: 32px 20px; }
+    .auth-main { padding: 32px 16px; }
+    .btn-lg { width: 100%; }
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }
