@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import Header2 from "../components/header2"
 
 const LoginPage=()=>{
 

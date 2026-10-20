@@ -11,33 +11,41 @@ import EditEventPage from "../pages/editEventPage";
 import Error404 from "../components/error404";
 import Header2 from "../components/header2";
 import Header from "../components/header";
+import GuestOnly from "./guestOnly";
 
 const routes = createBrowserRouter([
     {
         path: "",
         element: <App />,
+
         children: [
             {
-                element: <Header />,
+                element: <GuestOnly isLoggedIn={false} />,
                 children: [
                     {
-                        index:true,
-                        element:<LoginPage/>
-                    },
+                        element: <Header />,
+                        children: [
+                            {
+                                index: true,
+                                element: <LoginPage />
+                            },
 
-                    {
-                        path: "login",
-                        element: <LoginPage />
-                    },
-                    {
-                        path: "register",
-                        element: <RegisterPage />
+                            {
+                                path: "login",
+                                element: <LoginPage />
+                            },
+
+                            {
+                                path: "register",
+                                element: <RegisterPage />
+                            }
+                        ]
                     }
                 ]
             },
 
             {
-                element: <Protect token={true} />,
+                element: <Protect token={false} />,
                 children: [
                     {
                         element: <Header2 />,
