@@ -1,15 +1,17 @@
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { CuserContext } from "../auth/cuserContext";
+import Loading from "../components/loading";
 
-const Protect = ({token}:{token:boolean}) => {
-    
+const Protect = () => {
 
-    //check token
+    const { loading, cuser } = useContext(CuserContext)
 
-    if (!token)
-        return <Navigate to={"/login"} replace/>
-
-    return <Outlet/>
-
+    if (loading)
+        return <Loading/>
+    if (cuser)
+        return <Outlet />
+    return <Navigate to={"/login"} replace />
 }
 
 export default Protect
