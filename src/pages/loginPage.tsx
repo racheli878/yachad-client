@@ -1,17 +1,24 @@
-import { useNavigate } from "react-router-dom"
-
-const LoginPage=()=>{
 
 
-    const navigete=useNavigate()
-const f=()=>{
-    navigete("/allEvents")
-}
+const LoginPage = () => {
 
-    return<>
-    <h1>login</h1>
 
-   <button onClick={f}>הכנסו</button>
+    // const login =async (data: loginData) => {
+    //     const res =await api.post<UserAndToken>("/auth/login", data)
+    //     localStorage.setItem("token",res.data.token)
+    //     //context
+    //     return res.data
+    // }
+
+    // const navigete = useNavigate()
+    // const f = () => {
+    //     navigete("/allEvents")
+    // }
+
+    return <>
+        <h1>login</h1>
+
+        {/* <button onClick={}>הכנסו</button> */}
     </>
 }
 
