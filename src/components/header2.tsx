@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { Link, Outlet } from "react-router-dom"
 import { CuserContext } from "../auth/cuserContext"
 
+
 const Header2=()=>{
 
     const {logOut, cuser}= useContext(CuserContext)
