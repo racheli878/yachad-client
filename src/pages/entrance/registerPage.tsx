@@ -4,17 +4,23 @@ import FormRegister from "./formRegister"
 
 const RegisterPage = () => {
 
-    return <>
-        {/* <div><h2 className="text-center mt-10">register here</h2></div> */}
+    return <div className="auth-layout">
         <EntranceSide />
-        <NavLink className="nav-link" to="login">כניסה</NavLink>
-        <NavLink className="nav-link" to="register">הרשמה</NavLink>
-        <h2>נעים להכיר</h2>
-        <div>שם וטלפון יוצגו למשתתפים במפגשים שלך. המייל נשאר פרטי.</div>
-        <FormRegister />
-        <div>כבר רשומים?  <Link to={"/login"}>להתחברות</Link></div>
-
-    </>
+        <main className="auth-main">
+            <div className="auth-card">
+                <div className="auth-switch">
+                    <NavLink to="/login">כניסה</NavLink>
+                    <NavLink to="/register">הרשמה</NavLink>
+                </div>
+                <div className="auth-heading">
+                    <h2>נעים להכיר</h2>
+                    <p>שם וטלפון יוצגו למשתתפים במפגשים שלך. המייל נשאר פרטי.</p>
+                </div>
+                <FormRegister />
+                <p className="auth-footer">כבר רשומים?  <Link to={"/login"}>להתחברות</Link></p>
+            </div>
+        </main>
+    </div>
 }
 
 export default RegisterPage

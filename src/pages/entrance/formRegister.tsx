@@ -28,10 +28,10 @@ const FormRegister = () => {
     }
 
 
-    return <form className="card auth-card stack mx-auto my-10" onSubmit={handleSubmit(onSubmit)}>
+    return <form className="stack my-auto" onSubmit={handleSubmit(onSubmit)}>
 
         <div className="field">
-            <label htmlFor="fullName">שם ומשפחה</label>
+            <label htmlFor="fullName">שם ומשפחה
             <input className="input" type="text"
                 aria-invalid={!!errors.fullName}
 
@@ -41,12 +41,12 @@ const FormRegister = () => {
                     minLength: { value: 2, message: "שם חייב להיות לפחות באורך של 2 אותיות" },
                     maxLength: { value: 80, message: "שם לא יכול להכיל מעל 80 תוים" }
                 })}
-            />
+            /></label>
             {errors.fullName && <div className="field-error">{errors.fullName.message}</div>}
         </div>
 
         <div className="field">
-            <label htmlFor="email">מייל</label>
+            <label htmlFor="email">מייל
             <input className="input" type="email"
                 aria-invalid={!!errors.email}
 
@@ -58,12 +58,12 @@ const FormRegister = () => {
                         message: "כתובת המייל אינה תקינה"
                     }
                 })}
-            />
+            /></label>
             {errors.email && <div className="field-error">{errors.email.message}</div>}
         </div>
 
         <div className="field">
-            <label htmlFor="phone">טלפון</label>
+            <label htmlFor="phone">טלפון
             <input className="input" type="tel"
                 aria-invalid={!!errors.phone}
 
@@ -75,12 +75,12 @@ const FormRegister = () => {
                         message: "מספר הטלפון אינו תקין"
                     }
                 })}
-            />
+            /></label>
             {errors.phone && <div className="field-error">{errors.phone.message}</div>}
         </div>
 
         <div className="field">
-            <label htmlFor="password">סיסמה</label>
+            <label htmlFor="password">סיסמה
             <input className="input" type="password"
                 aria-invalid={!!errors.password}
                 // placeholder="סיסמה"
@@ -99,7 +99,7 @@ const FormRegister = () => {
                         message: "סיסמה לא יכולה לכלול יותר מ72 תוים"
                     }
                 })}
-            />
+            /></label>
             {errors.password && <div className="field-error">{errors.password.message}</div>}
         </div>
         {/* {errors.root.details&&} */}

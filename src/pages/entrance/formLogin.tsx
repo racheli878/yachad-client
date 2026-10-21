@@ -20,24 +20,24 @@ const FormLogin = () => {
         }
     }
 
-    return <form className="card auth-card stack mx-auto my-10" onSubmit={handleSubmit(onSubmit)}>
+    return <form className="stack my-auto" onSubmit={handleSubmit(onSubmit)}>
 
         <div className="field">
-            <label htmlFor="email">מייל</label>
+            <label htmlFor="email">מייל
             <input className="input" type="email"
                 aria-invalid={!!errors.email}
                 // placeholder="המייל שלי"
                 {...register("email", { required: "יש להזין מייל" })}
-            />
+            /></label>
             {errors.email && <div className="field-error">{errors.email.message}</div>}
         </div>
         <div className="field">
-            <label htmlFor="password">סיסמה</label>
+            <label htmlFor="password">סיסמה
             <input className="input" type="password"
                 aria-invalid={!!errors.password}
                 // placeholder="סיסמה"
                 {...register("password", { required: "יש להזין סיסמה" })}
-            />
+            /></label>
             {errors.password && <div className="field-error">{errors.password.message}</div>}
         </div>
 

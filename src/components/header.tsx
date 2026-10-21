@@ -2,12 +2,12 @@ import {  Outlet } from "react-router-dom"
 
 const Header=()=>{
     return<>
-<div className="inline-flex">
+{/* <div className="inline-flex"> */}
 {/* <Link className="nav-link" to="login">כניסה</Link> */}
-</div>
-<div className="inline-flex">
+{/* </div> */}
+{/* <div className="inline-flex"> */}
 {/* <Link className="nav-link" to="register">הרשמה</Link> */}
-</div>
+{/* </div> */}
 
 <Outlet/>
     </>

@@ -1,22 +1,36 @@
 import { useContext } from "react"
-import { Link, Outlet } from "react-router-dom"
+import {  Link, NavLink, Outlet } from "react-router-dom"
 import { CuserContext } from "../auth/cuserContext"
 
 
-const Header2=()=>{
+const Header2 = () => {
 
-    const {logOut, cuser}= useContext(CuserContext)
+    const { logOut, cuser } = useContext(CuserContext)
 
-    return<>
-    
-    <Link to="allEvents">לכל האירועים</Link>
-    <Link to="invitations">ההזמנות שלי</Link>
-    <Link to="addEvent">הוספת אירוע</Link>
+    return <>
+        <header className="app-header">
+            <div className="app-header-inner">
+                <div className="header-start">
+                    <Link className="logo" to="/allEvents">
+                        <span className="logo-mark"></span>
+                        <span className="logo-text">MeetUs</span>
+                    </Link>
 
-    <button onClick={logOut}>התנתקות</button>
-    <div>שלום, {cuser?.fullName}</div>
-    
-    <Outlet/>
+                    {/* <div >logo</div> */}
+                    <NavLink className="nav-link" to="allEvents">לכל האירועים</NavLink>
+                    <NavLink className="nav-link" to="invitations">ההזמנות שלי</NavLink>
+                </div>
+                <div className="header-end">
+                    <div className="muted">שלום, {cuser?.fullName}</div>
+                    <Link to="/addEvent" className="btn btn-primary">יצירת מפגש</Link>
+                    <button className="btn btn-ghost btn-sm" onClick={logOut}>התנתקות</button>
+                </div>
+
+            </div>
+
+        </header>
+
+        <Outlet />
     </>
 }
 
