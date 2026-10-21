@@ -378,6 +378,47 @@
   .auth-heading p { margin: 0; color: var(--color-muted); }
   .auth-footer { margin: 0; text-align: center; color: var(--color-muted); }
 
+  /* ---------- מפגש חדש ---------- */
+  .new-event { width: 100%; max-width: 860px; margin: 0 auto; padding: 36px 40px 64px; display: flex; flex-direction: column; gap: 26px; }
+  .new-event .page-head h1 { font-size: clamp(30px, 4vw, 40px); }
+  .new-event > button[type="submit"] { align-self: flex-end; }
+  /* כרטיס לבן לחלק בטופס */
+  .form-card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 26px; padding: 28px; }
+  .form-card.grid-form { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .form-card.grid-form > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .input-title { font-size: 20px; font-weight: 700; padding: 14px 16px; border: 2px solid var(--color-primary); }
+  /* רשימת המוזמנים */
+  .invitees { display: flex; flex-direction: column; gap: 12px; padding: 26px; }
+  .section-head h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 28px; }
+  .section-head p { margin: 4px 0 0; color: var(--color-muted); }
+  .invitee-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) 96px 44px; gap: 4px 10px; align-items: center; }
+  .invitee-num { grid-column: 1; grid-row: 1; margin: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--color-subtle); color: var(--color-muted); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .invitee-row > .input { grid-column: 2; grid-row: 1; direction: ltr; text-align: right; }
+  .invitee-row > .tag { grid-column: 3; grid-row: 1; justify-self: start; font-size: 13px; padding: 4px 10px; }
+  .invitee-row > .icon-btn { grid-column: 4; grid-row: 1; }
+  .invitee-row > .invitee-error { grid-column: 2 / -1; grid-row: 2; }
+  .tag-mail { background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .tag-phone { background: var(--color-accent-soft); color: var(--color-accent-text); }
+  .tag-invalid { background: var(--color-danger-soft); color: var(--color-danger-text); }
+  /* אייקון קטן בתוך התגית של המוזמן: מעטפה / טלפון / סימן קריאה */
+  .tag-mail::before, .tag-phone::before, .tag-invalid::before { content: ""; width: 14px; height: 14px; flex-shrink: 0; background: currentColor; -webkit-mask: var(--tag-icon) center / contain no-repeat; mask: var(--tag-icon) center / contain no-repeat; }
+  .tag-mail { --tag-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E"); }
+  .tag-phone { --tag-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2'/%3E%3C/svg%3E"); }
+  .tag-invalid { --tag-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v6M12 16.5v.5'/%3E%3C/svg%3E"); }
+  /* כפתור הסרה: הטקסט מוסתר מהעין (קוראי מסך קוראים אותו), ובמקומו X */
+  .icon-remove { font-size: 0; }
+  .icon-remove::before { content: ""; width: 18px; height: 18px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .add-row { align-self: flex-start; border-radius: 14px; padding: 12px 18px; font-weight: 800; }
+  .form-actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+  /* מסך ההצלחה */
+  .success-card { align-items: center; text-align: center; padding: 40px 28px; }
+  .success-card::before { content: ""; width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center / 32px no-repeat; }
+  .success-card h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 34px; }
+  .success-card h4, .success-card p { margin: 0; color: var(--color-muted); font-size: 18px; font-weight: 600; }
+  .skipped { flex-direction: column; gap: 6px; }
+  .skipped h4 { margin: 0; }
+  .skipped-list { margin: 0; padding-inline-start: 20px; }
+
   /* ---------- 15. טלפון ---------- */
   @media (max-width: 640px) {
     .container-narrow, .app-header-inner, .event-hero-inner { padding-left: 16px; padding-right: 16px; }
@@ -386,5 +427,10 @@
     .auth-main { padding: 32px 16px; }
     .auth-card { padding: 28px 20px; min-height: 0; }
     .btn-lg { width: 100%; }
+    .new-event { padding: 24px 16px 48px; }
+    .form-card, .invitees { padding: 20px; }
+    .invitee-row { grid-template-columns: 30px minmax(0, 1fr) 44px; }
+    .invitee-row > .tag { grid-column: 2; grid-row: 2; justify-self: start; }
+    .invitee-row > .invitee-error { grid-row: 3; }
   }
 }

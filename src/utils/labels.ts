@@ -27,15 +27,19 @@ export const EventStatusLabels: Record<EventStatus, string> = {
     CANCELLED: "בוטל"
 }
 
-export const EventRoleLabels:Record<EventRole,string>={
-ORGANIZER:"מארגן",
-PARTICIPANT:"משתתף"
+export const EventRoleLabels: Record<EventRole, string> = {
+    ORGANIZER: "מארגן",
+    PARTICIPANT: "משתתף"
 }
 
-export const InvitationStatusLabels:Record<InvitationStatus,string>={
-    DECLINED:"נדחתה",
-    ACCEPTED:"אושרה",
-    PENDING:"ממתינה"
+export const InvitationStatusLabels: Record<InvitationStatus, string> = {
+    DECLINED: "נדחתה",
+    ACCEPTED: "אושרה",
+    PENDING: "ממתינה"
 }
 
-
+export const contactLabels: Record<string, string> = {
+    "tag-mail": "מייל",
+    "tag-phone": "טלפון",
+    "tag-invalid": "לא תקין"
+};
