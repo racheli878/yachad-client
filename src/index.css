@@ -85,7 +85,7 @@
 /* container של Tailwind מוחלף בגרסה שלנו: רוחב מרבי 1200px ושוליים מהצדדים */
 @utility container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1580px;
   margin-inline: auto;
   padding-inline: 40px;
   @media (max-width: 640px) { padding-inline: 16px; }
@@ -111,7 +111,7 @@
   .two-cols > .side { flex: 1 1 300px; min-width: 0; }
 
   /* רשת כרטיסים שמסתדרת לבד לפי הרוחב */
-  .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+  .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 24px; }
   .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
   .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
   .grid-form .full { grid-column: 1 / -1; }
@@ -122,7 +122,7 @@
 
   /* ---------- 4. כותרת עליונה (Header) ---------- */
   .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-line); }
-  .app-header-inner { max-width: 1200px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+  .app-header-inner { max-width: 1580px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-ink); }
   /* הסמל של MeetUs (public/meetus-mark.svg) מוצג כרקע של התגית */
@@ -264,6 +264,14 @@
   .filters > * { flex: 1 1 150px; }
   .filters .search { flex: 2 1 260px; }
   .filters > .btn { flex: 0 0 auto; }
+  /* תיבת החיפוש: הטקסט של ה־label מוסתר מהעין (קוראי מסך עדיין קוראים אותו), ובתוך התיבה זכוכית מגדלת */
+  .filters .search { font-size: 0; gap: 0; }
+  .filters .search .input { font-size: 17px; padding-inline-start: 48px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233e5a54' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 20px; background-position: right 16px center; }
+  [dir="ltr"] .filters .search .input { background-position: left 16px center; }
+  /* כותרת הדף + שורת המשנה מתחתיה, צמודות */
+  .page-head { display: flex; flex-direction: column; gap: 4px; }
+  .page-head h1 { margin: 0; }
+  .page-head .page-title-sub { margin-top: 0; }
   /* כפתור הפעלה/כיבוי: כשהוא "לחוץ" (aria-pressed=true) הוא נצבע בירוק */
   .btn[aria-pressed="true"] { background: var(--color-primary-soft); border-color: var(--color-primary); color: var(--color-ink); font-weight: 800; }
 
@@ -279,7 +287,7 @@
 
   /* ---------- 9. דף מפגש: אזור עליון כהה ולשוניות ---------- */
   .event-hero { background: var(--color-ink); color: #fff; }
-  .event-hero-inner { max-width: 1200px; margin: 0 auto; padding: 32px 40px 0; display: flex; flex-direction: column; gap: 22px; }
+  .event-hero-inner { max-width: 1580px; margin: 0 auto; padding: 32px 40px 0; display: flex; flex-direction: column; gap: 22px; }
   .event-hero h1 { font-size: clamp(30px, 4vw, 48px); }
   .event-hero .muted { color: var(--color-muted-on-dark); }
   .event-hero .tag { background: var(--color-ink-3); color: #dcebe6; }

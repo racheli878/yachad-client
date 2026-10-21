@@ -21,9 +21,10 @@ const AllEventsPage = () => {
 
 
     return <div className="container page">
-
+ <div className="page-head">
         <h1>המפגשים שלי</h1>
-        <div>{data?.events.length} מפגשים</div>
+        <div className="page-title-sub">{data?.events.length} מפגשים</div>
+ </div>
 
   <div className="filters">
        <label className="field search">
@@ -41,8 +42,10 @@ const AllEventsPage = () => {
 
         <div className="grid-cards">
             {data?.events.map(e => <EventCard key={e.id} event={e} />)}
-            {data?.events.length==0&&<div>עדיין אין מפגשים</div>}
-            {data?.events.length==0&&<Link to="/addEvent">לחצו ליצירת המפגש הראשון</Link>}
+            <div>
+            {data?.events.length==0&&<div>לא נמצאו מפגשים</div>}
+            {data?.events.length==0&&<Link to="/addEvent">לחצו ליצירת מפגש</Link>}
+            </div>
         </div>
   </div>
 

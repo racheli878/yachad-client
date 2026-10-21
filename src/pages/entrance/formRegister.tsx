@@ -106,7 +106,7 @@ const FormRegister = () => {
 
         {errors.root && <div className="alert alert-error">{errors.root.message}</div>}
 
-        <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={isSubmitting}>{isSubmitting ? "שולח" : "שליחה"}{isSubmitting && <Loading />}</button>
+        <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={isSubmitting}>{isSubmitting ? "טוען" : "הרשמה"}{isSubmitting && <Loading />}</button>
 
     </form>
 
