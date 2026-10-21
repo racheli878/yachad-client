@@ -17,34 +17,40 @@ const FormRegister = () => {
         catch (e) {
             const error = getApiError(e)
             if (error.details)
-                error.details.forEach(f => setError(f.field as keyof RegisterData, {message:f.message}))
-            else if(error.code=="EMAIL_TAKEN")
-                setError("email",{message:error.message})
-            else if(error.code=="PHONE_TAKEN")
-                setError("phone",{message:error.message})
+                error.details.forEach(f => setError(f.field as keyof RegisterData, { message: f.message }))
+            else if (error.code == "EMAIL_TAKEN")
+                setError("email", { message: error.message })
+            else if (error.code == "PHONE_TAKEN")
+                setError("phone", { message: error.message })
             else
                 setError("root", { message: error.message })
         }
     }
 
 
-    return <form onSubmit={handleSubmit(onSubmit)}>
+    return <form className="card auth-card stack mx-auto my-10" onSubmit={handleSubmit(onSubmit)}>
 
-        <div>
-            <input type="text"
-                placeholder="שם ומשפחה"
+        <div className="field">
+            <label htmlFor="fullName">שם ומשפחה</label>
+            <input className="input" type="text"
+                aria-invalid={!!errors.fullName}
+
+                // placeholder="שם ומשפחה"
                 {...register("fullName", {
                     required: "יש להזין שם מלא",
                     minLength: { value: 2, message: "שם חייב להיות לפחות באורך של 2 אותיות" },
                     maxLength: { value: 80, message: "שם לא יכול להכיל מעל 80 תוים" }
                 })}
             />
-            {errors.fullName && <div>{errors.fullName.message}</div>}
+            {errors.fullName && <div className="field-error">{errors.fullName.message}</div>}
         </div>
 
-        <div>
-            <input type="email"
-                placeholder="מייל"
+        <div className="field">
+            <label htmlFor="email">מייל</label>
+            <input className="input" type="email"
+                aria-invalid={!!errors.email}
+
+                // placeholder="מייל"
                 {...register("email", {
                     required: "יש להזין מייל",
                     pattern: {
@@ -53,12 +59,15 @@ const FormRegister = () => {
                     }
                 })}
             />
-            {errors.email && <div>{errors.email.message}</div>}
+            {errors.email && <div className="field-error">{errors.email.message}</div>}
         </div>
 
-        <div>
-            <input type="tel"
-                placeholder="טלפון"
+        <div className="field">
+            <label htmlFor="phone">טלפון</label>
+            <input className="input" type="tel"
+                aria-invalid={!!errors.phone}
+
+                // placeholder="טלפון"
                 {...register("phone", {
                     required: "יש להזין מספר טלפון",
                     pattern: {
@@ -67,12 +76,14 @@ const FormRegister = () => {
                     }
                 })}
             />
-            {errors.phone && <div>{errors.phone.message}</div>}
+            {errors.phone && <div className="field-error">{errors.phone.message}</div>}
         </div>
 
-        <div>
-            <input type="password"
-                placeholder="סיסמה"
+        <div className="field">
+            <label htmlFor="password">סיסמה</label>
+            <input className="input" type="password"
+                aria-invalid={!!errors.password}
+                // placeholder="סיסמה"
                 {...register("password", {
                     required: "יש להזין סיסמה",
                     pattern: {
@@ -89,13 +100,13 @@ const FormRegister = () => {
                     }
                 })}
             />
-            {errors.password && <div>{errors.password.message}</div>}
+            {errors.password && <div className="field-error">{errors.password.message}</div>}
         </div>
         {/* {errors.root.details&&} */}
 
-        {errors.root && <div>{errors.root.message}</div>}
+        {errors.root && <div className="alert alert-error">{errors.root.message}</div>}
 
-        <button type="submit" disabled={isSubmitting}>{isSubmitting ? "שולח" : "שליחה"}{isSubmitting && <Loading />}</button>
+        <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={isSubmitting}>{isSubmitting ? "שולח" : "שליחה"}{isSubmitting && <Loading />}</button>
 
     </form>
 

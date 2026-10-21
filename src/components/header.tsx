@@ -1,12 +1,12 @@
-import { Link, Outlet } from "react-router-dom"
+import {  Outlet } from "react-router-dom"
 
 const Header=()=>{
     return<>
-<div>
-<Link to="login">כניסה</Link>
+<div className="inline-flex">
+{/* <Link className="nav-link" to="login">כניסה</Link> */}
 </div>
-<div>
-<Link to="register">הרשמה</Link>
+<div className="inline-flex">
+{/* <Link className="nav-link" to="register">הרשמה</Link> */}
 </div>
 
 <Outlet/>

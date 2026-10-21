@@ -32,11 +32,11 @@ eventDate:string|null,
 status:EventStatus,
 location:string|null,
 myRole:EventRole,
-food:string,
-budjet:number,
+food:string|null,
+budget:number|null,
 organizer:{id:number,fullName:string,phone:string},
-participants:{userId:number,fullName:string,phone:string,role:EventRole}[],
-tasks:{id:number,description:string,isTaken:boolean,assignee:{id:number,fullName:string},isMine:boolean}[],
+// participants:{userId:number,fullName:string,phone:string,role:EventRole}[],
+// tasks:{id:number,description:string,isTaken:boolean,assignee:{id:number,fullName:string}|null,isMine:boolean}[],
 }
 
 export interface EventShortInvite{
@@ -48,7 +48,7 @@ export interface EventShortInvite{
     category:EventCategory,
     activityType:ActivityType,
     status:EventStatus,
-    budjet:number,
+    budget:number|null,
     participantsCount:number,
     organizer:{id:number,fullName:string}
 }

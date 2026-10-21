@@ -3,7 +3,7 @@ import type LoginData from "../models/loginData";
 import type registerData from "../models/registerData";
 import type User from "../models/userModel";
 import { getMe, loginApi, registerApi } from "../api/auth";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 interface CuserContextType {
@@ -25,6 +25,7 @@ export const CuserContext = createContext<CuserContextType>({
 const CuserProvider = ({ children }: { children: ReactNode }) => {
     const [cuser, setCuser] = useState<User | null>(null)
     const [loading, setLoading] = useState(!!localStorage.getItem("token"))
+    const queryClient=useQueryClient()
 
     const login = async (data: LoginData) => {
         const res = await loginApi(data)
@@ -39,7 +40,6 @@ const CuserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const logOut = () => {
-        const queryClient=useQueryClient()
         localStorage.removeItem("token")
         queryClient.clear()
         setCuser(null)
