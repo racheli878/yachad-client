@@ -1,4 +1,4 @@
-import { type EventsResponse } from "../models/event";
+import {type CreateEventResponse, type EventsResponse, type NewEventRequest } from "../models/event";
 import api from "./generalAxios";
 
 const getAllEvents = async (search: string, isMyOrganize: boolean) => {
@@ -12,3 +12,8 @@ const getAllEvents = async (search: string, isMyOrganize: boolean) => {
 }
 
 export default getAllEvents
+
+export const createEvent=async(event:NewEventRequest)=>{
+    const res=await api.post<CreateEventResponse>("/events",event)
+    return res.data
+}

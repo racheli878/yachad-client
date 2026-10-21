@@ -338,6 +338,9 @@
 
   /* רשימה ריקה */
   .empty { border: 2px dashed var(--color-input-line); border-radius: 24px; padding: 32px 22px; text-align: center; color: var(--color-muted); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .empty-page { background: var(--color-surface); padding: 56px 22px; }
+  .empty-title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 26px; color: var(--color-ink); }
+  .empty p { margin: 0; }
 
   /* טעינה */
   .loading { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 48px 16px; color: var(--color-muted); font-weight: 700; }

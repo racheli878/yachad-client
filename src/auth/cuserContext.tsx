@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
 import type LoginData from "../models/loginData";
-import type registerData from "../models/registerData";
+import type RegisterData from "../models/registerData";
 import type User from "../models/userModel";
-import { getMe, loginApi, registerApi } from "../api/auth";
+import { getMe, loginApi, registerApi } from "../api/authApi";
 import { useQueryClient } from "@tanstack/react-query";
 
 
@@ -10,7 +10,7 @@ interface CuserContextType {
     cuser: User | null;
     loading: boolean;
     login: (data: LoginData) => Promise<void>;
-    register: (data: registerData) => Promise<void>;
+    register: (data: RegisterData) => Promise<void>;
     logOut: () => void;
 }
 
@@ -33,7 +33,7 @@ const CuserProvider = ({ children }: { children: ReactNode }) => {
         setCuser(res.user)
     }
 
-    const register = async (data: registerData) => {
+    const register = async (data: RegisterData) => {
         const res = await registerApi(data)
         localStorage.setItem("token", res.token)
         setCuser(res.user)
