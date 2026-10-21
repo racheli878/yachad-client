@@ -64,7 +64,7 @@ const NewEventPage = () => {
         return <>
             <div>
                 <h2>המפגש נוצר!</h2>
-                <h4>נשלחו <span>{invitationSummary.invitationSent}</span> הזמנות</h4>
+               {invitationSummary.invitationSent>0? <h4>נשלחו <span>{invitationSummary.invitationSent}</span> הזמנות</h4>:<p>לא נשלחו הזמנות כלל</p>}
             </div>
             {invitationSummary.skippedMessages.length!=0&&
             <div>
@@ -73,7 +73,6 @@ const NewEventPage = () => {
                     {invitationSummary.skippedMessages.map((i,index) => <li key={index}>{i}</li>)}
                 </ul>
             </div>}
-            {invitationSummary.invitationSent==0&&<p>לא נשלחו הזמנות כלל</p>}
             <Link to={`/event/${invitationSummary.eventId}`}>לכניסה למפגש</Link>
         </>
 
@@ -168,7 +167,8 @@ const NewEventPage = () => {
                     validate:(value)=>{
                         if(!value.trim())
                             return true
-                        return( /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())||/^0\d{8,9}$/.test(value.trim())||"יש להזין כתובת מייל או מספר טלפון תקין")
+                        const cleanPhone = value.trim().replace(/[-\s]/g, "");
+                        return( /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())||/^0\d{8,9}$/.test(cleanPhone)||"יש להזין כתובת מייל או מספר טלפון תקין")
                     }})} />
                 {errors.invitees?.[i]?.contact&&<div>{errors.invitees?.[i].contact?.message}</div>}
                 <span>אמור להיות סמל</span>
