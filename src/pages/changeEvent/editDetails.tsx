@@ -33,6 +33,7 @@ const EditDetails = ({ event }: { event: EventDetails }) => {
         mutationFn: updateEvent,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["events", event.id] })
+            queryClient.invalidateQueries({ queryKey: ["events"] })
             navigate(`/event/${event.id}`)
         },
         onError: (error) => {

@@ -304,6 +304,7 @@
   .event-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
   .event-hero-actions .alert { flex-basis: 100%; }
   .event-hero > .info-tiles { grid-column: 1 / -1; }
+  .event-hero > .tabs { grid-column: 1 / -1; margin-bottom: -36px; }
   .info-tile p { margin: 0; }
   .event-hero > .info-tiles { gap: 18px; }
   .event-hero .info-tile { min-height: 124px; padding: 24px 28px; border-radius: 22px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
@@ -315,6 +316,7 @@
   .btn-outline-light:hover:not(:disabled) { border-color: #fff; }
   @media (max-width: 760px) {
     .event-hero { grid-template-columns: 1fr; padding: 28px 16px; }
+    .event-hero > .tabs { margin-bottom: -28px; }
     .event-hero-actions { justify-content: flex-start; }
   }
 
