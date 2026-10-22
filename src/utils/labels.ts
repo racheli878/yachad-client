@@ -43,3 +43,10 @@ export const contactLabels: Record<string, string> = {
     "tag-phone": "טלפון",
     "tag-invalid": "לא תקין"
 };
+
+export const StatusSentenceLabels: Record<EventStatus, string> = {
+    PLANNING: "הסקר פתוח, הפרטים עוד לא סגורים",
+    SCHEDULED: "התאריך והמקום סגורים, הסקר נסגר",
+    COMPLETED: "המפגש עבר; ההתחשבנות עדיין זמינה",
+    CANCELLED: "המפגש לא יתקיים"
+}

@@ -1,5 +1,6 @@
+export const statuses = ["PLANNING","SCHEDULED", "COMPLETED", "CANCELLED"] as const
 
-export type EventStatus="PLANNING"|"SCHEDULED"| "COMPLETED"| "CANCELLED"
+export type EventStatus=typeof statuses[number]
 
 export type EventRole="ORGANIZER"|"PARTICIPANT" 
 
@@ -10,3 +11,4 @@ export type EventCategory = typeof categories[number]
 export const activityTypes=["BIRTHDAY","GATHERING", "MEAL","SPORT","TRIP", "REFRESHMENT", "HOLIDAY", "OTHER"] as const
 
 export type ActivityType=typeof activityTypes[number]
+

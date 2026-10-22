@@ -54,8 +54,7 @@ export interface EventShortInvite{
     organizer:{id:number,fullName:string}
 }
 
-// שליחת יצירת אירוע
-export interface NewEventForm{
+export interface EventForm{
     title:string,
     description:string|null,
     eventDate:string|null,
@@ -64,7 +63,15 @@ export interface NewEventForm{
     category:EventCategory,
     activityType:ActivityType,
     budget:number|null,
+}
+
+// שליחת יצירת אירוע
+export interface NewEventForm extends EventForm{
     invitees:{contact:string}[],
+}
+
+export interface EditEventForm extends EventForm{
+    status:EventStatus
 }
 
 // בקשת יצירת אירוע
@@ -123,3 +130,5 @@ export interface CreateEventResponse extends EventPageResponse {
     },
     questionsCount: number
 }
+
+export type UpdateEventRequest = Partial<Omit<NewEventRequest, "invitees" | "questions"> & { status: EventStatus }>
