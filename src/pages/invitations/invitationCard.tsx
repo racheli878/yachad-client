@@ -36,21 +36,21 @@ const InvitationCard=({invitation}:{invitation:Invitation})=>{
 
 
     return<>
-    <div>
+    <div className="invite-stub">
         {invitation.event.eventDate?formatDate(invitation.event.eventDate):"עדיין לא נקבע תאריך"} 
     </div>
-    <div>
-        <div>
-            <span>{activityTypeLabels[invitation.event.activityType]} · {categoryLabels[invitation.event.category]}</span>
-            <span>{EventStatusLabels[invitation.event.status]}</span>
+    <div className="invite-body">
+        <div className="invite-tags">
+            <span className="tag invite-tag">{activityTypeLabels[invitation.event.activityType]} · {categoryLabels[invitation.event.category]}</span>
+            <span className="tag tag-pending invite-tag">{EventStatusLabels[invitation.event.status]}</span>
         </div>
-        <h2>{invitation.event.title}</h2>
-        <p>הוזמנת ע"י {invitation.invitedBy.fullName} · {invitation.event.participantsCount} כבר אשרו</p>
-        <div>{invitation.event.location?invitation.event.location:"עדיין לא נקבע מקום"}</div>
-        <div>תקציב {invitation.event.budget!=null?invitation.event.budget+ "₪":"עדיין לא נקבע תקציב"}</div>
-        <button disabled={isPending} onClick={()=>mutate(invitation.id)}>{isPending?<><div>טוען...</div><Loading/></>:"רוצה להשתתף"}</button>
-        <button disabled={isDeslining} onClick={()=>declineInvitation(invitation.id)}>{isDeslining?<><div>טוען...</div><Loading/></>:"לא הפעם"}</button>
-        {err!=""&&<div>{err}</div>}
+        <h2 className="invite-title">{invitation.event.title}</h2>
+        <p className="invite-from">הוזמנת ע"י {invitation.invitedBy.fullName} · {invitation.event.participantsCount} כבר אשרו</p>
+        <div className="invite-meta invite-place">{invitation.event.location?invitation.event.location:"עדיין לא נקבע מקום"}</div>
+        <div className="invite-meta invite-budget">תקציב {invitation.event.budget!=null?invitation.event.budget+ "₪":"עדיין לא נקבע תקציב"}</div>
+        <button className="btn btn-primary" disabled={isPending} onClick={()=>mutate(invitation.id)}>{isPending?<><div>טוען...</div><Loading/></>:"רוצה להשתתף"}</button>
+        <button className="btn btn-ghost" disabled={isDeslining} onClick={()=>declineInvitation(invitation.id)}>{isDeslining?<><div>טוען...</div><Loading/></>:"לא הפעם"}</button>
+        {err!=""&&<div className="alert alert-error invite-error">{err}</div>}
     </div>
     </>
 }
