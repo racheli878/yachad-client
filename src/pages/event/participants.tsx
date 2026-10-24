@@ -14,7 +14,7 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
                 <span className={`tag tag-${p.role.toLowerCase()} person-role`}>{EventRoleLabels[p.role]}</span>
             </div>
         })}
-        <Link className="event-people-invite" to="/">+ הזמנת משתתפים</Link>
+       {<Link className="event-people-invite" to="/">+ הזמנת משתתפים</Link>}
     </div>
 
 }

@@ -4,6 +4,7 @@ import EventCard from "./eventCard"
 import { useQuery } from "@tanstack/react-query"
 import getAllEvents from "../../api/eventsApi"
 import { Link } from "react-router-dom"
+import getApiError from "../../utils/getApiError"
 
 
 const AllEventsPage = () => {
@@ -38,7 +39,7 @@ const AllEventsPage = () => {
 
         {isPending && <Loading />}
 
-        {isError && <div>{error.message}</div>}
+        {isError && <div>{getApiError(error).message}</div>}
 
         <div className="grid-cards">
             {data?.events.map(e => <EventCard key={e.id} event={e} />)}

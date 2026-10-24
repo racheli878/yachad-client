@@ -1,4 +1,5 @@
 import type { ActivityType, EventCategory, EventRole, EventStatus } from "./eventSelections";
+import type { SkippedInvitee } from "./invitation";
 
 // מפגש אחד בתוך הרשימה
 export default interface EventListItem{
@@ -54,6 +55,7 @@ export interface EventShortInvite{
     organizer:{id:number,fullName:string}
 }
 
+//טופס יצירת אירוע
 export interface EventForm{
     title:string,
     description:string|null,
@@ -113,13 +115,6 @@ export interface EventPageResponse {
     tasks: Task[]
 }
 
-// מוזמן שלא קיבל הזמנה, והסיבה
-export interface SkippedInvitee {
-    email: string | null,
-    phone: string | null,
-    reason: "DUPLICATE_IN_LIST" | "ALREADY_PARTICIPANT" | "ALREADY_INVITED",
-    message: string
-}
 
 // התשובה ליצירת מפגש: כל דף המפגש, ועוד סיכום ההזמנות
 export interface CreateEventResponse extends EventPageResponse {

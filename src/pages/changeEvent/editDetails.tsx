@@ -32,7 +32,7 @@ const EditDetails = ({ event }: { event: EventDetails }) => {
     const { mutate, isPending } = useMutation({
         mutationFn: updateEvent,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["events", event.id] })
+            queryClient.invalidateQueries({ queryKey: ["event", event.id] })
             queryClient.invalidateQueries({ queryKey: ["events"] })
             navigate(`/event/${event.id}`)
         },
@@ -65,7 +65,7 @@ const EditDetails = ({ event }: { event: EventDetails }) => {
             <form className="edit-form" onSubmit={handleSubmit(onsubmit)}>
                 <ChangeStatus event={event} />
                 <FormEvent />
-                <Link to="/allEvents" className="btn btn-ghost">ביטול</Link>
+                <Link to={`/event/${event.id}`} className="btn btn-ghost">ביטול</Link>
                 <button className="btn btn-primary btn-lg" type="submit" disabled={isPending}>{isPending ? <div>מעדכן... <Loading /></div> : <div>שמירת השינויים</div>}</button>
             </form>
         </FormProvider>
