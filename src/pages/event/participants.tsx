@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import type { Participant } from "../../models/event"
 import { EventRoleLabels } from "../../utils/labels"
 
@@ -14,7 +13,8 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
                 <span className={`tag tag-${p.role.toLowerCase()} person-role`}>{EventRoleLabels[p.role]}</span>
             </div>
         })}
-       {<Link className="event-people-invite" to="/">+ הזמנת משתתפים</Link>}
+        {/* רק המנהל רואה את זה אז אין עניין אם יש גם לשונית לניהול המשתתפים */}
+       {/* {<Link className="event-people-invite" to="/">+ הזמנת משתתפים</Link>} */}
     </div>
 
 }

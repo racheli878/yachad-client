@@ -16,8 +16,8 @@ const FormRegister = () => {
         }
         catch (e) {
             const error = getApiError(e)
-            if (error.details)
-                error.details.forEach(f => setError(f.field as keyof RegisterData, { message: f.message }))
+            if (error.details&&error.details?.length>0)
+                error.details?.forEach(f => setError(f.field as keyof RegisterData, { message: f.message }))
             else if (error.code == "EMAIL_TAKEN")
                 setError("email", { message: error.message })
             else if (error.code == "PHONE_TAKEN")

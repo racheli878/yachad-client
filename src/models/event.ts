@@ -1,5 +1,6 @@
 import type { ActivityType, EventCategory, EventRole, EventStatus } from "./eventSelections";
 import type { SkippedInvitee } from "./invitation";
+import type { Task } from "./tasks";
 
 // מפגש אחד בתוך הרשימה
 export default interface EventListItem{
@@ -72,6 +73,7 @@ export interface NewEventForm extends EventForm{
     invitees:{contact:string}[],
 }
 
+//שליחת עריכת אירוע
 export interface EditEventForm extends EventForm{
     status:EventStatus
 }
@@ -99,14 +101,7 @@ export interface Participant {
     joinedAt: string
 }
 
-// תפקיד במפגש ("להביא שתייה")
-export interface Task {
-    id: number,
-    description: string,
-    isTaken: boolean,
-    assignee: { id: number, fullName: string } | null,
-    isMine: boolean
-}
+
 
 // דף מפגש: שלושה חלקים זה לצד זה
 export interface EventPageResponse {

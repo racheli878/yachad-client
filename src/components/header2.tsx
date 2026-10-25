@@ -25,7 +25,7 @@ const Header2 = () => {
 
                     {/* <div >logo</div> */}
                     <NavLink className="nav-link" to="allEvents">לכל האירועים</NavLink>
-                    <NavLink className="nav-link" to="invitations">ההזמנות שלי <span className="badge">{data?.count}</span></NavLink>
+                    <NavLink className="nav-link" to="invitations">ההזמנות שלי <span className="badge">{data?.count!=0&&data?.count}</span></NavLink>
                 </div>
                 <div className="header-end">
                     <div className="muted">שלום, {cuser?.fullName}</div>

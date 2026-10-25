@@ -25,7 +25,7 @@ const EventHome=()=>{
 
 return<>
  <div className="container page event-body">
-            <Tasks tasks={data.tasks} />
+            <Tasks id={id} />
             <Participants participants={data.participants} />
         </div>
 </>
