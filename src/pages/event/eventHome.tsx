@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getEvent } from "../../api/eventsApi"
 import Participants from "./participants"
-import Tasks from "./tasks"
+import Tasks from "./tasks and participants/tasks"
 import { Link, useParams } from "react-router-dom"
 import getApiError from "../../utils/getApiError"
 import Loading from "../../components/loading"

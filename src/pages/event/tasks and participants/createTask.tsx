@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createTask } from "../../api/tasks"
+import { createTask } from "../../../api/tasks"
 import { useForm } from "react-hook-form"
-import getApiError from "../../utils/getApiError"
-import Loading from "../../components/loading"
+import getApiError from "../../../utils/getApiError"
+import Loading from "../../../components/loading"
 
 const CreateTask = ({ id }: { id: number }) => {
 
-    const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<{ description: string }>({ mode: "onBlur" })
+    const { register, handleSubmit, formState: { errors }, setError, reset,watch } = useForm<{ description: string }>({ mode: "onSubmit" })
     const queryClient = useQueryClient()
     const { mutate, isError, error, isPending } = useMutation({
         mutationFn: createTask,
@@ -37,7 +37,6 @@ const CreateTask = ({ id }: { id: number }) => {
                     message: "תיאור התפקיד לא יכול לכלול מעל 200 תוים"
                 }
             })} />
-            {errors.description && <div>{errors.description.message}</div>}
             {errors.description && <div className="field-error">{errors.description.message}</div>}
             <button className="btn btn-dark task-create-btn" type="submit" disabled={isPending}>{isPending ? <>מוסיף...<Loading /></> : "הוספה"}</button>
         </form>

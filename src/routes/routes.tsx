@@ -12,8 +12,8 @@ import Error404 from "../components/error404";
 import Header2 from "../components/header2";
 import Header from "../components/header";
 import GuestOnly from "./guestOnly";
-import Expenses from "../pages/event/expenses";
-import AllParticipants from "../pages/event/allParticipants";
+import Expenses from "../pages/event/expenses/expenses";
+import AllParticipants from "../pages/event/tasks and participants/allParticipants";
 import Survey from "../pages/event/survey";
 import EventHome from "../pages/event/eventHome";
 

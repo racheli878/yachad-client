@@ -2,7 +2,7 @@
 const Loading=()=>{
 
     return<>
-    loading
+    <span className="spinner" role="status" aria-label="טוען"></span>
     </>
 }
 

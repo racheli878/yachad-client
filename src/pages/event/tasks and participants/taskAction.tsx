@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import getApiError from "../../utils/getApiError"
-import Loading from "../../components/loading"
+import getApiError from "../../../utils/getApiError"
+import Loading from "../../../components/loading"
 
 const TaskAction = ({ eventId, taskId, text, func }: { eventId: number, taskId: number, text: string, func: (data: { eventId: number, taskId: number }) => Promise<unknown> }) => {
 

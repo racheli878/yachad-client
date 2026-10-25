@@ -1,4 +1,5 @@
 import type { Participant } from "../../models/event"
+import firstLettersOfName from "../../utils/firstLettersOfName"
 import { EventRoleLabels } from "../../utils/labels"
 
 const Participants = ({ participants }: { participants: Participant[] }) => {
@@ -7,7 +8,7 @@ const Participants = ({ participants }: { participants: Participant[] }) => {
         <h2 className="event-people-title">משתתפים · {participants.length}</h2>
         {participants.map(p => {
             return <div className="person-row" key={p.userId}>
-                <span className={`avatar person-avatar avatar-${p.role.toLowerCase()}`}>{p.fullName.trim().split(/\s+/).map(name => name[0]).join("")}</span>
+                <span className={`avatar person-avatar avatar-${p.role.toLowerCase()}`}>{firstLettersOfName(p.fullName)}</span>
                 <p className="person-name">{p.fullName}</p>
                 <p className="person-phone ltr">{p.phone}</p>
                 <span className={`tag tag-${p.role.toLowerCase()} person-role`}>{EventRoleLabels[p.role]}</span>

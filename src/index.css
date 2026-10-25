@@ -121,7 +121,10 @@
   .page-title-sub { color: var(--color-muted); font-size: 18px; margin-top: 4px; }
 
   /* ---------- 4. כותרת עליונה (Header) ---------- */
-  .app-header { background: var(--color-surface); border-bottom: 1px solid var(--color-line); }
+  /* הכותרת נשארת דבוקה למעלה בזמן גלילה */
+  .app-header { position: sticky; top: 0; z-index: 40; background: var(--color-surface); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 10px rgba(20, 48, 43, .06); }
+  /* צבע סימון טקסט (בהיר, מתאים גם על הרקע הכהה של ראש המפגש) */
+  ::selection { background: #f8dfb0; color: var(--color-ink); }
   .app-header-inner { max-width: 1880px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-ink); }
@@ -394,7 +397,23 @@
 
   /* טעינה */
   .loading { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 48px 16px; color: var(--color-muted); font-weight: 700; }
-  .spinner { width: 28px; height: 28px; border: 3px solid var(--color-line); border-top-color: var(--color-primary); border-radius: 50%; animation: spin .8s linear infinite; }
+  /* עיגול טעינה: לבד בדף – גדול ובמרכז; בתוך כפתור – קטן ובצבע הטקסט */
+  .spinner { display: block; width: 40px; height: 40px; margin: 64px auto; border: 4px solid var(--color-line); border-top-color: var(--color-primary); border-radius: 50%; animation: yachad-spin .8s linear infinite; }
+  .btn .spinner, .icon-btn .spinner { display: inline-block; width: 1em; height: 1em; margin: 0; border-width: 2.5px; border-color: currentColor; border-top-color: transparent; vertical-align: -0.15em; }
+  @keyframes yachad-spin { to { transform: rotate(360deg); } }
+  /* כפתור אייקון (מחיקת תפקיד) בזמן טעינה: העיגול במקום האייקון */
+  .task-row > .task-btn .spinner { width: 18px; height: 18px; }
+  .task-row > .task-btn:has(.spinner)::before { display: none; }
+
+  /* טעינת דף: כרטיסים אפורים מהבהבים במקום התוכן */
+  .skeleton-page { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .skeleton-card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .skeleton-line { height: 14px; border-radius: 7px; background: linear-gradient(90deg, #e4eae6 25%, #f3f6f4 50%, #e4eae6 75%); background-size: 200% 100%; animation: skeleton-shine 1.4s ease-in-out infinite; }
+  .skeleton-line.title { height: 22px; width: 60%; }
+  .skeleton-line.short { width: 40%; }
+  .skeleton-line.block { height: 90px; border-radius: 16px; }
+  @keyframes skeleton-shine { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2s; } .skeleton-line { animation: none; } }
 
   /* חלון אישור (מחיקה / עזיבה) */
   .modal-backdrop { position: fixed; inset: 0; background: rgba(20, 48, 43, .45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
@@ -542,10 +561,14 @@
   }
 
   /* דף מפגש – כרטיס התפקידים (לפי EventPage.dc.html) */
-  .event-tasks { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 28px; }
+  .event-tasks { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 16px; padding: 28px; }
+  /* הטופס מיושר לכותרת גם כשמופיעה שגיאה מתחתיו */
+  .task-create { margin-top: 6px; }
   .event-tasks-head h2, .event-tasks-head p { margin: 0; }
   .event-tasks-title { font-size: 24px; }
   .event-tasks-count { color: var(--color-muted); }
+  .event-tasks-head .bar { height: 8px; width: 220px; max-width: 100%; margin-top: 10px; }
+  .event-tasks-head .bar-fill { background: var(--color-primary); transition: width .3s; }
   .event-tasks-list { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 16px; }
   .event-tasks-empty { padding: 22px; border-radius: 18px; border: 2px dashed var(--color-input-line); color: var(--color-muted); font-weight: 700; text-align: center; }
 
@@ -553,7 +576,10 @@
   .task-create-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
   .task-input { width: 240px; max-width: 100%; padding: 11px 14px; border-radius: var(--radius-field-sm); }
   .task-create-btn { border-radius: var(--radius-field-sm); padding: 11px 18px; }
-  .task-create-form .field-error, .task-create .alert { flex-basis: 100%; }
+  .task-create-form > div, .task-create .alert { flex-basis: 100%; order: 9; contain: inline-size; }
+  /* רווח בין השדה לכפתור במרווח ולא במרווח gap, כדי שהודעות שגיאה לא ירחיבו את הטופס */
+  .task-create-form { column-gap: 0; }
+  .task-create-btn { margin-inline-start: 8px; }
   .task-create .alert { margin-top: 8px; }
 
   /* שורת תפקיד: עיגול | שם התפקיד + מי לקח | כפתורים */
@@ -570,8 +596,9 @@
   .task-btn { background: var(--color-surface); border-color: var(--color-input-line); color: var(--color-muted); font-weight: 700; padding: 9px 16px; }
   .task-row:has(> .task-avatar-free) > .task-btn:first-of-type { order: 1; background: var(--color-accent); border-color: transparent; color: var(--color-ink); font-weight: 800; padding: 10px 18px; }
   .task-row:has(> .task-avatar-free) > .task-btn:first-of-type:hover:not(:disabled) { filter: brightness(1.05); }
+  .task-row:not(:has(> .task-avatar-free)) > .task-btn:hover:not(:disabled) { background: var(--color-subtle); border-color: #b3c2bb; color: var(--color-ink); }
   .task-icon { order: 2; background: var(--color-surface); font-size: 0; color: var(--color-muted); }
-  .task-row:has(> .task-avatar-free) > .task-btn:not(:first-of-type) { order: 3; width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--radius-field-sm); font-size: 0; }
+  .task-row:has(> .task-avatar-free) > .task-btn:not(:first-of-type) { order: 3; width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--radius-field-sm); font-size: 0; gap: 0; }
   .task-icon::before, .task-row:has(> .task-avatar-free) > .task-btn:not(:first-of-type)::before { content: ""; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
   .task-icon { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 20h4L19 9l-4-4L4 16z'/%3E%3C/svg%3E"); }
   .task-row > .task-btn:not(:first-of-type) { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13'/%3E%3C/svg%3E"); }
