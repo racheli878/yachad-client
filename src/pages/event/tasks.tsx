@@ -25,32 +25,33 @@ const Tasks = ({ id }: { id: number }) => {
             <button>הוספה</button>
         </div>
         <div>
-            {data?.tasks.map(t => <div key={t.id}>
-                {t.isTaken ?
-                    <>
-                        <span>{t.assignee?.fullName.trim().split(/\s+/).map(name => name[0]).join("")}</span>
-                        <span>{t.description}</span>
-                        <span>{t.assignee?.fullName} {t.isMine && " (אני)"}</span>
-                        {t.isMine && <button>ויתור</button>}
-                    </> : t.id != edit ?
+            {!data?.tasks || data.tasks.length == 0 ? <div>עדיין אין תפקידים</div> :
+                data?.tasks.map(t => <div key={t.id}>
+                    {t.isTaken ?
                         <>
-                            <span>?</span>
+                            <span>{t.assignee?.fullName.trim().split(/\s+/).map(name => name[0]).join("")}</span>
                             <span>{t.description}</span>
-                            <span>פנוי - אולי תקחו?</span>
-                            <button>עלי!</button>
-                            {data?.event.myRole == "ORGANIZER" &&
-                                <>
-                                    <button>delete</button>
-                                    <button onClick={() => {setEdit(t.id)}}>edit</button>
-                                </>}
+                            <span>{t.assignee?.fullName} {t.isMine && " (אני)"}</span>
+                            {t.isMine && <button>ויתור</button>}
+                        </> : t.id != edit ?
+                            <>
+                                <span>?</span>
+                                <span>{t.description}</span>
+                                <span>פנוי - אולי תקחו?</span>
+                                <button>עלי!</button>
+                                {data?.event.myRole == "ORGANIZER" &&
+                                    <>
+                                        <button>delete</button>
+                                        <button onClick={() => { setEdit(t.id) }}>edit</button>
+                                    </>}
 
-                        </> : <>
-                            <span>?</span>
-                        <EditTask eventId={id} task={t} finishEdit={()=>{setEdit(-1)}}/>
-                        </>}
+                            </> : <>
+                                <span>?</span>
+                                <EditTask eventId={id} task={t} finishEdit={() => { setEdit(-1) }} />
+                            </>}
 
 
-            </div>)}
+                </div>)}
         </div>
     </div>
 }
