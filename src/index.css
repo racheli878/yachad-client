@@ -85,7 +85,7 @@
 /* container של Tailwind מוחלף בגרסה שלנו: רוחב מרבי 1200px ושוליים מהצדדים */
 @utility container {
   width: 100%;
-  max-width: 1880px;
+  max-width: 1280px;
   margin-inline: auto;
   padding-inline: 40px;
   @media (max-width: 640px) { padding-inline: 16px; }
@@ -125,7 +125,7 @@
   .app-header { position: sticky; top: 0; z-index: 40; background: var(--color-surface); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 10px rgba(20, 48, 43, .06); }
   /* צבע סימון טקסט (בהיר, מתאים גם על הרקע הכהה של ראש המפגש) */
   ::selection { background: #f8dfb0; color: var(--color-ink); }
-  .app-header-inner { max-width: 1880px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+  .app-header-inner { max-width: 1280px; margin: 0 auto; padding: 14px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 
   .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-ink); }
   /* הסמל של MeetUs (public/meetus-mark.svg) מוצג כרקע של התגית */
@@ -290,14 +290,14 @@
 
   /* ---------- 9. דף מפגש: אזור עליון כהה ולשוניות ---------- */
   .event-hero { background: var(--color-ink); color: #fff; }
-  .event-hero-inner { max-width: 1880px; margin: 0 auto; padding: 32px 40px 0; display: flex; flex-direction: column; gap: 22px; }
+  .event-hero-inner { max-width: 1280px; margin: 0 auto; padding: 32px 40px 0; display: flex; flex-direction: column; gap: 22px; }
   .event-hero h1 { font-size: clamp(30px, 4vw, 48px); }
   .event-hero .muted { color: var(--color-muted-on-dark); }
   .event-hero .tag { background: var(--color-ink-3); color: #dcebe6; }
   .event-hero .tag-solid { background: var(--color-accent); color: var(--color-ink); }
 
-  /* דף מפגש – החלק העליון (רקע כהה לכל הרוחב, תוכן ממורכז עד 1880px) */
-  .event-hero { display: grid; grid-template-columns: 1fr auto; column-gap: 18px; row-gap: 24px; align-items: start; padding: 36px max(40px, calc((100% - 1880px) / 2 + 40px)); }
+  /* דף מפגש – החלק העליון (רקע כהה לכל הרוחב, תוכן ממורכז עד 1280px) */
+  .event-hero { display: grid; grid-template-columns: 1fr auto; column-gap: 18px; row-gap: 24px; align-items: start; padding: 36px max(40px, calc((100% - 1280px) / 2 + 40px)); }
   .event-hero-head { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
   .event-hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .event-hero .tag { font-size: 14px; padding: 5px 12px; }
@@ -620,6 +620,140 @@
     .task-who { flex-basis: 100%; margin-top: -12px; padding-inline-start: 56px; }
     .task-edit-form { flex: 1 1 calc(100% - 56px); }
     .task-row > .task-error { flex-basis: 100%; }
+  }
+
+  /* ---------- לשונית הוצאות (לפי Expenses.dc.html) ---------- */
+  /* כרטיס הסיכום בנוי מהשורות הראשונות של הרשת; ה-::before הוא הרקע הלבן שלו */
+  .page.expenses-page { display: grid; grid-template-columns: 28px auto minmax(0, 1fr) auto 28px; align-items: end; gap: 0; }
+  .expenses-page::before { content: ""; grid-column: 1 / -1; grid-row: 1 / 5; align-self: stretch; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); }
+  .exp-sum-label { grid-column: 2 / 4; grid-row: 1; margin: 28px 0 0; color: var(--color-muted); font-weight: 700; }
+  .exp-sum-total { grid-column: 2; grid-row: 2; margin: 0; font-family: var(--font-display); font-size: 54px; font-weight: 400; line-height: 1.1; white-space: nowrap; }
+  .exp-sum-budget { grid-column: 3; grid-row: 2; margin: 0 0 9px; padding-inline-start: 12px; font-size: 20px; font-weight: 600; color: var(--color-muted); }
+  .exp-sum-side { grid-column: 4; grid-row: 1 / 3; text-align: left; margin-bottom: 6px; }
+  .exp-sum-side p { margin: 0; }
+  .exp-remaining { font-weight: 800; font-size: 20px; color: var(--color-primary-text); }
+  .exp-percent { color: var(--color-muted); }
+  .exp-over { font-weight: 800; font-size: 18px; color: var(--color-danger-text); background: var(--color-danger-soft); padding: 8px 14px; border-radius: 12px; }
+  .exp-over { display: inline-flex; align-items: center; gap: 8px; }
+  .exp-over::before { content: ""; flex-shrink: 0; width: 22px; height: 22px; background: currentColor; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 2 20h20z'/%3E%3Cpath d='M12 10v4M12 17.5v.01'/%3E%3C/svg%3E"); -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .exp-bar { grid-column: 2 / 5; grid-row: 3; height: 18px; border-radius: 9px; margin-top: 18px; display: flex; }
+  /* פס מחולק: חלק לכל משתתף, באותו צבע כמו הריבוע שלו במקרא */
+  .exp-bar .bar-fill { flex-shrink: 0; border-radius: 0; background: var(--color-ink); transition: width .3s; }
+  .exp-bar .bar-fill:nth-child(3n+2) { background: #8fc1b5; }
+  .exp-bar .bar-fill:nth-child(3n) { background: var(--color-accent); }
+  /* חריגה: מסגרת אדומה סביב הפס */
+  .expenses-page:has(.exp-over) .exp-bar { outline: 2px solid var(--color-danger); outline-offset: 3px; }
+  .exp-legend { grid-column: 2 / 5; grid-row: 4; display: flex; flex-wrap: wrap; gap: 12px 22px; margin: 18px 0 28px; color: var(--color-muted); font-weight: 600; }
+  .exp-legend-item { display: flex; align-items: center; gap: 8px; }
+  .exp-legend-item p { margin: 0; }
+  .exp-legend-dot { width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .exp-legend-item:nth-child(3n+1) .exp-legend-dot { background: var(--color-ink); color: #fff; }
+  .exp-legend-item:nth-child(3n+2) .exp-legend-dot { background: #8fc1b5; color: var(--color-ink); }
+  .exp-legend-item:nth-child(3n) .exp-legend-dot { background: var(--color-accent); color: var(--color-ink); }
+
+  /* כרטיס רשימת ההוצאות */
+  .exp-list-card { grid-column: 1 / -1; grid-row: 5; margin-top: 24px; gap: 14px; }
+  .exp-list-title { margin: 0; font-size: 22px; }
+  .exp-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; background: var(--color-bg); border-radius: 18px; padding: 14px; }
+  .exp-fields { display: contents; }
+  .exp-field-reason, .exp-field-amount { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .exp-field-reason { flex: 2 1 200px; }
+  .exp-field-amount { flex: 1 1 110px; }
+  .exp-field { font-size: 14px; color: var(--color-muted); gap: 4px; }
+  .exp-input { padding: 11px 14px; border-radius: var(--radius-field-sm); font-size: 16px; }
+  .exp-form > .btn { margin-top: 25px; }
+  .exp-add-btn { border-radius: var(--radius-field-sm); padding: 0 20px; height: 48px; min-height: 0; }
+  .exp-edit-form > .btn-sm { margin-top: 29px; }
+  .exp-form > .alert { flex-basis: 100%; }
+  .exp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .exp-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid #e6ece8; }
+  .exp-row:last-child { border-bottom: 0; }
+  .exp-row-main { flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: 14px; }
+  .exp-avatar { width: 42px; height: 42px; border-radius: 12px; font-size: 15px; background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .exp-row:has(.exp-edit-btn) .exp-avatar, .exp-row:has(.exp-edit-form) .exp-avatar { background: var(--color-accent-soft); color: var(--color-accent-text); }
+  .exp-row-text p { margin: 0; }
+  .exp-reason { font-weight: 800; overflow-wrap: anywhere; }
+  .exp-who { color: var(--color-muted); font-size: 15px; }
+  .exp-row-side { display: flex; align-items: center; gap: 10px; }
+  .exp-amount { margin: 0; font-weight: 800; font-size: 18px; white-space: nowrap; }
+  .exp-edit-btn { font-size: 0; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 20h4L19 9l-4-4L4 16z'/%3E%3C/svg%3E"); }
+  .exp-edit-btn::before { content: ""; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .exp-del-btn { font-size: 0; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13'/%3E%3C/svg%3E"); }
+  .exp-del-btn::before { content: ""; width: 18px; height: 18px; background: currentColor; -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .exp-del-btn:hover:not(:disabled) { color: var(--color-danger-text); background: var(--color-danger-soft); }
+  .exp-del-btn:disabled { opacity: .55; cursor: not-allowed; }
+  .exp-del-btn .spinner { width: 18px; height: 18px; }
+  .exp-del-btn:has(.spinner)::before { display: none; }
+  .exp-row:has(.exp-row-error) { flex-wrap: wrap; }
+  .exp-row-error { flex-basis: 100%; order: 9; padding: 10px 14px; font-size: 15px; }
+  /* מצב ריק */
+  .exp-empty { grid-column: 2 / 5; grid-row: 3; margin-top: 18px; padding: 14px; border: 2px dashed var(--color-input-line); border-radius: 16px; color: var(--color-muted); font-weight: 700; text-align: center; }
+  .expenses-page:has(.exp-empty) .exp-bar { display: none; }
+  .exp-row:has(.exp-edit-form) { flex-wrap: wrap; }
+  .exp-row:has(.exp-edit-form) .exp-row-main { flex-basis: 100%; }
+  .exp-row:has(.exp-edit-form) .exp-row-side { flex-basis: 100%; }
+  .exp-edit-form { flex: 1; }
+
+  @media (max-width: 640px) {
+    .page.expenses-page { grid-template-columns: 20px minmax(0, 1fr) 20px; }
+    .exp-empty { grid-column: 2; grid-row: 5; }
+    .expenses-page::before { grid-row: 1 / 7; }
+    .exp-sum-label, .exp-sum-total, .exp-sum-budget, .exp-sum-side, .exp-bar, .exp-legend { grid-column: 2; }
+    .exp-sum-label { margin-top: 22px; }
+    .exp-sum-total { grid-row: 2; font-size: 42px; }
+    .exp-sum-budget { grid-row: 3; padding: 0; margin: 2px 0 0; font-size: 17px; }
+    .exp-sum-side { grid-row: 4; text-align: right; margin: 12px 0 0; }
+    .exp-bar { grid-row: 5; }
+    .exp-legend { grid-row: 6; margin-bottom: 22px; }
+    .exp-list-card { grid-row: 7; }
+  }
+
+  /* ----- התחשבנות (כרטיס כהה ליד רשימת ההוצאות) ----- */
+  .page.expenses-page { grid-template-columns: 28px auto minmax(0, 1fr) minmax(0, 332px) 28px; }
+  .exp-sum-side { justify-self: end; }
+  .exp-list-card { grid-column: 1 / 4; margin-inline-end: 24px; align-self: start; }
+  .settle-card, .settle-load-error, .expenses-page > .spinner { grid-column: 4 / 6; grid-row: 5; margin-top: 24px; align-self: start; }
+  .settle-card { gap: 16px; }
+  .settle-body { display: contents; }
+  .settle-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 10px; }
+  .settle-title { margin: 0; font-size: 22px; }
+  .settle-time { font-size: 14px; color: var(--color-muted-on-dark); }
+  .settle-outdated { flex-basis: 100%; display: flex; align-items: center; gap: 8px; margin-top: 4px; padding: 10px 12px; border-radius: 12px; background: rgba(242, 169, 59, .16); color: #f8d79c; font-size: 15px; font-weight: 700; }
+  .settle-outdated::before { content: ""; flex-shrink: 0; width: 20px; height: 20px; background: currentColor; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 2 20h20z'/%3E%3Cpath d='M12 10v4M12 17.5v.01'/%3E%3C/svg%3E"); -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .settle-stats { display: grid; grid-template-columns: 1fr auto; column-gap: 10px; padding: 16px; border-radius: 18px; background: var(--color-ink-2); }
+  .settle-stat { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; }
+  .settle-stat-label, .settle-count-label { margin: 0; font-size: 14px; color: var(--color-muted-on-dark); }
+  .settle-count-label { grid-column: 2; grid-row: 1; }
+  .settle-stat-value, .settle-count { font-weight: 800; font-size: 22px; }
+  .settle-count { grid-column: 2; grid-row: 2; }
+  .settle-sub { margin: 0; font-size: 16px; font-weight: 700; color: var(--color-muted-on-dark); }
+  .settle-note { margin: -12px 0 0; font-size: 14px; color: var(--color-muted-on-dark); opacity: .8; }
+  .settle-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .settle-list:empty { display: none; }
+  .settle-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 10px; padding: 14px 16px; border-radius: 18px; background: var(--color-surface); color: var(--color-ink); --tone: var(--color-danger-text); }
+  .settle-receive { --tone: var(--color-primary); }
+  .settle-person p { margin: 0; }
+  .settle-person:last-child { text-align: left; }
+  .settle-name { font-weight: 800; overflow-wrap: anywhere; }
+  .settle-phone { font-size: 14px; color: var(--color-muted); }
+  .settle-mid { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--tone); }
+  .settle-arrow { font-size: 0; width: 34px; height: 18px; background: currentColor; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 18' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 9H3M9 3 3 9l6 6'/%3E%3C/svg%3E"); -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+  .settle-receive .settle-arrow { transform: scaleX(-1); }
+  .settle-amount { margin: 0; font-weight: 800; white-space: nowrap; }
+  .settle-balance { padding: 14px 16px; border-radius: 18px; background: var(--color-accent); color: var(--color-ink); font-weight: 800; }
+  .settle-empty { padding: 18px; border: 2px dashed rgba(191, 214, 207, .45); border-radius: 18px; color: var(--color-muted-on-dark); font-weight: 700; text-align: center; }
+  .settle-btn { width: 100%; border: 2px solid #8fc1b5; border-radius: 999px; background: transparent; color: #fff; }
+  .settle-btn:hover:not(:disabled) { background: rgba(143, 193, 181, .15); color: #fff; }
+  .settle-card .alert { margin: 0; }
+  @media (max-width: 1000px) {
+    .exp-list-card { grid-column: 1 / -1; margin-inline-end: 0; }
+    .settle-card, .settle-load-error, .expenses-page > .spinner { grid-column: 1 / -1; grid-row: 6; }
+  }
+  @media (max-width: 640px) {
+    .exp-list-card { grid-row: 7; }
+    .settle-card, .settle-load-error, .expenses-page > .spinner { grid-row: 8; }
+    .settle-row { padding: 12px; gap: 6px; }
+    .settle-arrow { width: 26px; }
   }
 
   /* ---------- 15. טלפון ---------- */

@@ -1,10 +1,9 @@
-import { useContext, useState } from "react"
-import { CuserContext } from "../../../auth/cuserContext"
+import { useState } from "react"
 import type { Expense, LittleExpense } from "../../../models/expenses"
 import firstLettersOfName from "../../../utils/firstLettersOfName"
 import { FormProvider, useForm } from "react-hook-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { addExpense } from "../../../api/expenses"
+import { addExpense, deleteExpense } from "../../../api/expenses"
 import Loading from "../../../components/loading"
 import ExpenseFields from "./expenseFields"
 import EditExpense from "./editExpens"
@@ -23,37 +22,51 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
         },
     })
 
+     const { mutate:deleteExp, isPending:pendingDelExp,isError:isErrorDelExp,error:errorDelExp,variables } = useMutation({
+        mutationFn: deleteExpense,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["expenses", id] })
+        },
+    })
+
     const onsubmit = (data: LittleExpense) => {
         mutate({ id, data })
     }
 
+    const delExpence=(e:Expense)=>{
+        if(confirm("למחוק את ההוצאה?"))
+            deleteExp({eventId:id,expenseId:e.id})
+    }
+
     const [edit,setEdit]=useState(-1)
 
-    return <div>
-        <h3>ההוצאות</h3>
+    return <div className="card exp-list-card">
+        <h3 className="exp-list-title">ההוצאות</h3>
 
         <FormProvider { ...methods}>
-            <form onSubmit={handleSubmit(onsubmit)}>
+            <form className="exp-form" onSubmit={handleSubmit(onsubmit)}>
                 <ExpenseFields/>
-            <button type="submit" disabled={isPending}>{isPending ? <>מוסיפים...<Loading /></> : "הוספה"}</button>
-            {isError&&<div>{getApiError(error).message}</div>}
+            <button className="btn btn-dark exp-add-btn" type="submit" disabled={isPending}>{isPending ? <>מוסיפים...<Loading /></> : "הוספה"}</button>
+            {isError&&<div className="alert alert-error">{getApiError(error).message}</div>}
             </form>
         </FormProvider>
 
-        <ul>
-            {expenses.map(e => <li key={e.id}>
-                <div>
-                    <span>{firstLettersOfName(e.paidBy.fullName)}</span>
-                    <div>
-                        <p>{e.reason}</p>
-                        <p>{e.paidBy.fullName} {e.isMine && " (אני) "}</p>
+        <ul className="exp-list">
+            {expenses.map(e => <li className="exp-row" key={e.id}>
+                <div className="exp-row-main">
+                    <span className="avatar exp-avatar">{firstLettersOfName(e.paidBy.fullName)}</span>
+                    <div className="exp-row-text">
+                        <p className="exp-reason">{e.reason}</p>
+                        <p className="exp-who">{e.paidBy.fullName} {e.isMine && " (אני) "}</p>
                     </div>
                 </div>
 
-                <div>
+                <div className="exp-row-side">
                     {e.id!=edit?<>
-                    <p>{e.amount} ₪</p>
-                    {e.isMine && <button onClick={()=>setEdit(e.id)}>edit</button>}
+                    <p className="exp-amount">{e.amount} ₪</p>
+                    {e.isMine && <button className="icon-btn exp-edit-btn" aria-label="עריכת ההוצאה" onClick={()=>setEdit(e.id)}>edit</button>}
+                    {e.isMine&&<button className="icon-btn exp-del-btn" aria-label="מחיקת ההוצאה" onClick={()=>delExpence(e)} disabled={pendingDelExp}>{pendingDelExp&&variables.expenseId==e.id?<>מוחק...<Loading/></>:"מחיקה"}</button>}
+                    {isErrorDelExp&&variables.expenseId==e.id&&<div className="alert alert-error exp-row-error">{getApiError(errorDelExp).message}</div>}
                     </>:<>
                     <EditExpense eventId={id} expense={e} finish={()=>setEdit(-1)}/>
                     </>}

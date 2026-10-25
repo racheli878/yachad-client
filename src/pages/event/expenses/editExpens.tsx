@@ -31,10 +31,11 @@ const EditExpense = ({ eventId, expense,finish }: { eventId: number, expense: Ex
 
     return <>
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onsubmit)}>
+            <form className="exp-form exp-edit-form" onSubmit={handleSubmit(onsubmit)}>
                 <ExpenseFields/>
-                <button disabled={isPending}>{isPending?<>מעדכן...<Loading/></>:"שמירה"}</button>
-                {isError&&<div>{getApiError(error).message}</div>}
+                <button className="btn btn-primary btn-sm" disabled={isPending}>{isPending?<>מעדכן...<Loading/></>:"שמירה"}</button>
+                <button className="btn btn-ghost btn-sm" type="button" onClick={finish}>ביטול</button>
+                {isError&&<div className="alert alert-error">{getApiError(error).message}</div>}
             </form>
         </FormProvider>
     </>

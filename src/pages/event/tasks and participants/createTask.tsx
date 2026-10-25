@@ -6,7 +6,7 @@ import Loading from "../../../components/loading"
 
 const CreateTask = ({ id }: { id: number }) => {
 
-    const { register, handleSubmit, formState: { errors }, setError, reset,watch } = useForm<{ description: string }>({ mode: "onSubmit" })
+    const { register, handleSubmit, formState: { errors }, setError, reset } = useForm<{ description: string }>({ mode: "onSubmit" })
     const queryClient = useQueryClient()
     const { mutate, isError, error, isPending } = useMutation({
         mutationFn: createTask,

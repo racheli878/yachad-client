@@ -66,7 +66,7 @@ const FormEvent = () => {
             <label className="field">תקציב משוער(₪)
                 <input className="input" type="number"
                     {...register("budget", {
-                        setValueAs: value=>{value===""?undefined:Number(value)},
+                        setValueAs: value=>{return value===""?null :Number(value)},
                         min: {
                             value: 0,
                             message: "תקציב לא יכול להיות שלילי"

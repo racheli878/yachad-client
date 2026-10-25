@@ -5,11 +5,11 @@ const ExpenseFields = () => {
 
     const { register, formState: { errors } } = useFormContext<LittleExpense>()
 
-    return <div className="form-card grid-form">
-        <div>
-            <label>
+    return <div className="exp-fields">
+        <div className="exp-field-reason">
+            <label className="field exp-field">
                 על מה שילמת?
-                <input {...register("reason", {
+                <input className="input exp-input" {...register("reason", {
                     required: "יש להזין סיבה להוצאה",
                     minLength: {
                         value: 2, message: "תיאור ההוצאה חייב לכלול לפחות 2 תוים"
@@ -20,13 +20,13 @@ const ExpenseFields = () => {
                 },
                 )} />
             </label>
-            {errors.reason && <div>{errors.reason.message}</div>}
+            {errors.reason && <div className="field-error">{errors.reason.message}</div>}
         </div>
 
-        <div>
-            <label>
+        <div className="exp-field-amount">
+            <label className="field exp-field">
                 סכום (₪)
-                <input type="number" step={0.01} {...register("amount", {
+                <input className="input exp-input" type="number" step={0.01} {...register("amount", {
                     valueAsNumber: true,
                     required: "יש להזין את סכום ההוצאה",
                     min: { value: 0.01, message: "הוצאה חייבת להיות גדולה מאפס" },
@@ -37,7 +37,7 @@ const ExpenseFields = () => {
                 }
                 )} />
             </label>
-            {errors.amount && <div>{errors.amount?.message}</div>}
+            {errors.amount && <div className="field-error">{errors.amount?.message}</div>}
         </div>
 
     </div>
