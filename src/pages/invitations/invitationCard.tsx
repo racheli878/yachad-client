@@ -1,4 +1,3 @@
-import { useState } from "react"
 import type Invitation from "../../models/invitation"
 import { activityTypeLabels, categoryLabels, EventStatusLabels } from "../../utils/labels"
 import { cancelInvitations, confirmInvitationApi } from "../../api/invitationsApi"
@@ -8,32 +7,25 @@ import Loading from "../../components/loading"
 import { useNavigate } from "react-router-dom"
 
 const InvitationCard = ({ invitation }: { invitation: Invitation }) => {
-    const [err, setErr] = useState("")
     const queryClient = useQueryClient()
     const nvaigate = useNavigate()
 
-    const { mutate, isPending } = useMutation({
+    const { mutate, isPending,isError,error } = useMutation({
         mutationFn: confirmInvitationApi,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["events"] })
             queryClient.invalidateQueries({ queryKey: ["invitations"] })
             nvaigate(`/event/${invitation.event.id}`)
         },
-        onError: (error) => {
-            setErr(getApiError(error).message)
-        }
     })
 
-    const { mutate: declineInvitation, isPending: isDeslining } = useMutation({
+    const { mutate: declineInvitation, isPending: isDeslining,isError:connotCancel, error:errorCancel } = useMutation({
         mutationFn: cancelInvitations,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["events"] })
             queryClient.invalidateQueries({ queryKey: ["invitations"] })
 
         },
-        onError: (error) => {
-            setErr(getApiError(error).message)
-        }
     })
     let month, day, time;
     if (invitation.event.eventDate) {
@@ -78,8 +70,9 @@ const InvitationCard = ({ invitation }: { invitation: Invitation }) => {
             <div className="invite-meta invite-place">{invitation.event.location ? invitation.event.location : "עדיין לא נקבע מקום"}</div>
             <div className="invite-meta invite-budget">תקציב {invitation.event.budget != null ? invitation.event.budget + "₪" : "עדיין לא נקבע תקציב"}</div>
             <button className="btn btn-primary" disabled={isPending} onClick={() => mutate(invitation.id)}>{isPending ? <><div>טוען...</div><Loading /></> : "רוצה להשתתף"}</button>
+            {isError&&<div>{getApiError(error).message}</div>}
             <button className="btn btn-ghost" disabled={isDeslining} onClick={() => declineInvitation(invitation.id)}>{isDeslining ? <><div>טוען...</div><Loading /></> : "לא הפעם"}</button>
-            {err != "" && <div className="alert alert-error invite-error">{err}</div>}
+            {connotCancel&& <div className="alert alert-error invite-error">{getApiError(errorCancel).message}</div>}
         </div>
     </>
 }

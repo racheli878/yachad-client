@@ -5,13 +5,12 @@ import getApiError from "../../utils/getApiError"
 import Loading from "../../components/loading"
 import { formatDate } from "../../utils/formatDate"
 import { activityTypeLabels, categoryLabels, EventStatusLabels } from "../../utils/labels"
-import { useState } from "react"
 
 const EventPage = () => {
 
     const { eventId } = useParams()
     const id = Number(eventId)
-    const { data, isError, error, isPending } = useQuery({
+    const { data, isPending , isError, error} = useQuery({
         queryKey: ["event", id],
         queryFn: () => getEvent(id)
     })
@@ -26,22 +25,19 @@ const EventPage = () => {
     }
     const queryClient = useQueryClient()
     const navigate = useNavigate()
-    const [errorMessage, setErrorMessage] = useState("")
-    const { mutate, isPending: isDeleting } = useMutation({
+    const { mutate,isError:cannotDel,error:notDel , isPending: isDeleting} = useMutation({
         mutationFn: deleteEvent,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["events"] })
             navigate("/allEvents")
         },
-        onError: (e) => setErrorMessage(getApiError(e).message)
     })
-    const { mutate: leaveMutate, isPending: isLeaving } = useMutation({
+    const { mutate: leaveMutate, isPending: isLeaving,isError:connotLeave,error:dontLeave } = useMutation({
         mutationFn: leavingEvent,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["events"] })
             navigate("/allEvents")
         },
-        onError: (e) => setErrorMessage(getApiError(e).message)
     })
 
     if (isPending)
@@ -69,8 +65,9 @@ const EventPage = () => {
             {data?.event.myRole == "ORGANIZER" ? <div className="event-hero-actions">
                 <Link className="btn btn-light" to="edit">עריכת פרטים</Link>
                 <button className="btn btn-outline-light" disabled={isDeleting} onClick={clearEvent}>{isDeleting ? <>מוחק...<Loading /></> : "מחיקת מפגש"}</button>
+                {cannotDel && <div className="alert alert-error">{getApiError(notDel).message}</div>}
             </div> : <button className="btn btn-outline-light" disabled={isLeaving} onClick={leaveEvent}>{isLeaving ? <div>עוזב... <Loading /></div> : <div>עזיבת המפגש</div>}</button>}
-                {errorMessage != "" && <div className="alert alert-error">{errorMessage}</div>}
+                {connotLeave && <div className="alert alert-error">{getApiError(dontLeave).message}</div>}
             {/* details */}
             <div className="info-tiles">
                 <div className="info-tile"><p className="info-tile-label">מתי</p><p className="info-tile-value">{data?.event.eventDate ? formatDate(data?.event.eventDate) : "עדיין לא נקבע תאריך"}</p></div>

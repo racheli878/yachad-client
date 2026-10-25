@@ -1,24 +1,22 @@
 import { useForm } from "react-hook-form";
 import type { Task } from "../../models/tasks";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editTask } from "../../api/event";
+import { Mutation, useMutation, useQueryClient } from "@tanstack/react-query";
+import { editTask } from "../../api/tasks";
 import Loading from "../../components/loading";
 import { useState } from "react";
 import getApiError from "../../utils/getApiError";
 
 const EditTask = ({ eventId, task, finishEdit }: { eventId: number, task: Task, finishEdit: () => void }) => {
 
-    const [err, setErr] = useState("")
     const { register, handleSubmit, formState: { errors } } = useForm<{ description: string }>({ mode: "onBlur" })
     const queryClient = useQueryClient()
-    const { mutate, isPending: isEditting } = useMutation({
+    const { mutate, isPending: isEditting,isError,error } = useMutation({
         mutationFn: editTask,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["event", eventId] })
             finishEdit()
         },
         onError: (e) => {
-            setErr(getApiError(e).message)
             queryClient.invalidateQueries({ queryKey: ["event", eventId] })
         }
     })
@@ -29,9 +27,9 @@ const EditTask = ({ eventId, task, finishEdit }: { eventId: number, task: Task, 
 
 
     return <>
-        <form onSubmit={handleSubmit(onsubmit)}>
+        <form className="task-edit-form" onSubmit={handleSubmit(onsubmit)}>
 
-            <input {...register("description", {
+            <input className="input task-input" {...register("description", {
                 required: "יש להזין תיאור",
                 minLength: {
                     value: 2, message: "תיאור התפקיד חייב לכלול לפחות 2 תוים"
@@ -42,13 +40,13 @@ const EditTask = ({ eventId, task, finishEdit }: { eventId: number, task: Task, 
                 }
             })}
                 defaultValue={task.description}></input>
-            {errors.description && <div>{errors.description.message}</div>}
+            {errors.description && <div className="field-error">{errors.description.message}</div>}
 
-            <button type="submit" disabled={isEditting}>{isEditting ? <>מעדכן...<Loading /></> : "אישור"}</button>
-            <button type="button" onClick={finishEdit}>ביטול</button>
+            <button className="btn btn-primary btn-sm" type="submit" disabled={isEditting}>{isEditting ? <>מעדכן...<Loading /></> : "אישור"}</button>
+            <button className="btn btn-ghost btn-sm" type="button" onClick={finishEdit}>ביטול</button>
         </form>
 
-        {err && <div>{err}</div>}
+        {isError && <div className="alert alert-error task-error">{getApiError(error).message}</div>}
     </>
 }
 
