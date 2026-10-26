@@ -11,21 +11,23 @@ import getApiError from "../../../utils/getApiError"
 
 const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) => {
 
-    const  methods= useForm<LittleExpense>({ mode: "onBlur" })
-    const { handleSubmit, reset }=methods
+    const methods = useForm<LittleExpense>({ mode: "onBlur" })
+    const { handleSubmit, reset } = methods
     const queryClient = useQueryClient()
-    const { mutate, isPending,isError,error } = useMutation({
+    const { mutate, isPending, isError, error } = useMutation({
         mutationFn: addExpense,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["expenses", id] })
+            queryClient.invalidateQueries({ queryKey: ["calculations", id] })
             reset()
         },
     })
 
-     const { mutate:deleteExp, isPending:pendingDelExp,isError:isErrorDelExp,error:errorDelExp,variables } = useMutation({
+    const { mutate: deleteExp, isPending: pendingDelExp, isError: isErrorDelExp, error: errorDelExp, variables } = useMutation({
         mutationFn: deleteExpense,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["expenses", id] })
+            queryClient.invalidateQueries({ queryKey: ["calculations", id] })
         },
     })
 
@@ -33,21 +35,21 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
         mutate({ id, data })
     }
 
-    const delExpence=(e:Expense)=>{
-        if(confirm("למחוק את ההוצאה?"))
-            deleteExp({eventId:id,expenseId:e.id})
+    const delExpence = (e: Expense) => {
+        if (confirm("למחוק את ההוצאה?"))
+            deleteExp({ eventId: id, expenseId: e.id })
     }
 
-    const [edit,setEdit]=useState(-1)
+    const [edit, setEdit] = useState(-1)
 
     return <div className="card exp-list-card">
         <h3 className="exp-list-title">ההוצאות</h3>
 
-        <FormProvider { ...methods}>
+        <FormProvider {...methods}>
             <form className="exp-form" onSubmit={handleSubmit(onsubmit)}>
-                <ExpenseFields/>
-            <button className="btn btn-dark exp-add-btn" type="submit" disabled={isPending}>{isPending ? <>מוסיפים...<Loading /></> : "הוספה"}</button>
-            {isError&&<div className="alert alert-error">{getApiError(error).message}</div>}
+                <ExpenseFields />
+                <button className="btn btn-dark exp-add-btn" type="submit" disabled={isPending}>{isPending ? <>מוסיפים...<Loading /></> : "הוספה"}</button>
+                {isError && <div className="alert alert-error">{getApiError(error).message}</div>}
             </form>
         </FormProvider>
 
@@ -62,13 +64,13 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
                 </div>
 
                 <div className="exp-row-side">
-                    {e.id!=edit?<>
-                    <p className="exp-amount">{e.amount} ₪</p>
-                    {e.isMine && <button className="icon-btn exp-edit-btn" aria-label="עריכת ההוצאה" onClick={()=>setEdit(e.id)}>edit</button>}
-                    {e.isMine&&<button className="icon-btn exp-del-btn" aria-label="מחיקת ההוצאה" onClick={()=>delExpence(e)} disabled={pendingDelExp}>{pendingDelExp&&variables.expenseId==e.id?<>מוחק...<Loading/></>:"מחיקה"}</button>}
-                    {isErrorDelExp&&variables.expenseId==e.id&&<div className="alert alert-error exp-row-error">{getApiError(errorDelExp).message}</div>}
-                    </>:<>
-                    <EditExpense eventId={id} expense={e} finish={()=>setEdit(-1)}/>
+                    {e.id != edit ? <>
+                        <p className="exp-amount">{e.amount} ₪</p>
+                        {e.isMine && <button className="icon-btn exp-edit-btn" aria-label="עריכת ההוצאה" onClick={() => setEdit(e.id)}>edit</button>}
+                        {e.isMine && <button className="icon-btn exp-del-btn" aria-label="מחיקת ההוצאה" onClick={() => delExpence(e)} disabled={pendingDelExp}>{pendingDelExp && variables.expenseId == e.id ? <>מוחק...<Loading /></> : "מחיקה"}</button>}
+                        {isErrorDelExp && variables.expenseId == e.id && <div className="alert alert-error exp-row-error">{getApiError(errorDelExp).message}</div>}
+                    </> : <>
+                        <EditExpense eventId={id} expense={e} finish={() => setEdit(-1)} />
                     </>}
                 </div>
             </li>)}

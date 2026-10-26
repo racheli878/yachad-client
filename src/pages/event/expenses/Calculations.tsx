@@ -87,7 +87,7 @@ const Calculations = () => {
                         </div>
                     </li>)}
                 </ul>
-               {data.myBalance&& <div className="settle-balance">
+               {data.myBalance!=null&& <div className="settle-balance">
                     המצב שלך:  {data.myBalance>0?`מגיע לך ${data.myBalance} ₪`:data.myBalance<0?`בחוב של ${Math.abs(data.myBalance)} ₪`:"אין חובות, איזה כיף!"}
                 </div>}
 

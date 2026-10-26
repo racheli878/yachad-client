@@ -726,6 +726,9 @@
   .settle-count-label { grid-column: 2; grid-row: 1; }
   .settle-stat-value, .settle-count { font-weight: 800; font-size: 22px; }
   .settle-count { grid-column: 2; grid-row: 2; }
+  .settle-count-label, .settle-count { text-align: center; justify-self: center; }
+  .settle-card:has(.settle-list:empty) :is(.settle-sub, .settle-note) { display: none; }
+  .settle-balance { text-align: center; }
   .settle-sub { margin: 0; font-size: 16px; font-weight: 700; color: var(--color-muted-on-dark); }
   .settle-note { margin: -12px 0 0; font-size: 14px; color: var(--color-muted-on-dark); opacity: .8; }
   .settle-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -750,10 +753,45 @@
     .settle-card, .settle-load-error, .expenses-page > .spinner { grid-column: 1 / -1; grid-row: 6; }
   }
   @media (max-width: 640px) {
+    .page.expenses-page { grid-template-columns: 20px minmax(0, 1fr) 20px; }
+    .exp-sum-side { justify-self: start; }
     .exp-list-card { grid-row: 7; }
     .settle-card, .settle-load-error, .expenses-page > .spinner { grid-row: 8; }
     .settle-row { padding: 12px; gap: 6px; }
     .settle-arrow { width: 26px; }
+  }
+
+  /* ----- סקר – מענה של משתתף ----- */
+  .survey-head, .survey-form, .survey-load-error { width: min(860px, 100% - 80px); margin-inline: auto; }
+  .survey-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; margin-top: 32px; }
+  .survey-title { margin: 0; font-family: var(--font-display); font-size: 32px; font-weight: 400; }
+  .survey-sub { margin: 4px 0 0; color: var(--color-muted); font-size: 17px; }
+  .survey-status { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .survey-answered { font-size: 14px; }
+  .survey-form { display: flex; flex-direction: column; gap: 22px; margin-top: 22px; margin-bottom: 64px; }
+  .survey-fieldset { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+  .survey-q { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+  .survey-q-title { margin: 0 0 6px; font-size: 21px; font-weight: 800; }
+  .survey-option { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 14px 16px; border: 1.5px solid var(--color-line); border-radius: 16px; background: var(--color-surface); font-weight: 700; font-size: 18px; cursor: pointer; transition: border-color .15s, background .15s; }
+  .survey-option:hover { border-color: var(--color-input-line); }
+  .survey-option:has(:checked) { border: 2px solid var(--color-primary); padding: 13.5px 15.5px; background: var(--color-primary-soft); }
+  .survey-option:has(:focus-visible) { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+  .survey-check { width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: var(--color-primary); cursor: inherit; }
+  .survey-fieldset:disabled .survey-option { cursor: default; }
+  .survey-fieldset:disabled .survey-option:not(:has(:checked)) { opacity: .6; }
+  .survey-note { display: flex; flex-direction: column; gap: 8px; padding: 22px 24px; border-radius: var(--radius-card); background: var(--color-accent-soft); font-weight: 800; font-size: 19px; }
+  .survey-note-hint { margin: 0; font-weight: 600; font-size: 15px; color: var(--color-accent-text); }
+  .survey-note-input { font-size: 17px; font-weight: 400; border-color: #e3c48a; background: var(--color-surface); }
+  .survey-save { align-self: flex-end; padding: 15px 34px; font-size: 18px; }
+  .survey-msg { margin: 0; }
+  .survey-load-error { margin-top: 32px; }
+  @media (max-width: 640px) {
+    .survey-head, .survey-form, .survey-load-error { width: calc(100% - 32px); }
+    .survey-head { margin-top: 24px; }
+    .survey-title { font-size: 28px; }
+    .survey-q, .survey-note { padding: 18px; }
+    .survey-option { font-size: 17px; }
+    .survey-save { align-self: stretch; }
   }
 
   /* ---------- 15. טלפון ---------- */

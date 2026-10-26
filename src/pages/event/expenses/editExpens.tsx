@@ -21,6 +21,7 @@ const EditExpense = ({ eventId, expense,finish }: { eventId: number, expense: Ex
         mutationFn: editExpense,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["expenses",eventId] })
+            queryClient.invalidateQueries({ queryKey: ["calculations",eventId] })
             finish()
         }
     })

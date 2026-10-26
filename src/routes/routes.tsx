@@ -14,7 +14,7 @@ import Header from "../components/header";
 import GuestOnly from "./guestOnly";
 import Expenses from "../pages/event/expenses/expenses";
 import AllParticipants from "../pages/event/tasks and participants/allParticipants";
-import Survey from "../pages/event/survey";
+import Survey from "../pages/event/surveyParticipant/survey";
 import EventHome from "../pages/event/eventHome";
 
 
