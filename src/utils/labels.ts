@@ -50,3 +50,4 @@ export const StatusSentenceLabels: Record<EventStatus, string> = {
     COMPLETED: "המפגש עבר; ההתחשבנות עדיין זמינה",
     CANCELLED: "המפגש לא יתקיים"
 }
+

@@ -18,9 +18,9 @@ const EventHome=()=>{
         return <Loading />
 
     if (isError)
-        return <div>
-            <p>{getApiError(error).message}</p>
-            <Link to="/allEvents">חזרה לכל האירועים</Link>
+        return <div className="page-error">
+            <p className="page-error-msg">{getApiError(error).message}</p>
+            <Link className="btn btn-ghost" to="/allEvents">חזרה לכל האירועים</Link>
         </div>
 
 return<>

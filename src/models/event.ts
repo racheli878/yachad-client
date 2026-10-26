@@ -1,5 +1,6 @@
 import type { ActivityType, EventCategory, EventRole, EventStatus } from "./eventSelections";
 import type { SkippedInvitee } from "./invitation";
+import type { NewQuestion, QuestionField } from "./survey";
 import type { Task } from "./tasks";
 
 // מפגש אחד בתוך הרשימה
@@ -68,11 +69,6 @@ export interface EventForm{
     budget:number|null,
 }
 
-// שליחת יצירת אירוע
-export interface NewEventForm extends EventForm{
-    invitees:{contact:string}[],
-}
-
 //שליחת עריכת אירוע
 export interface EditEventForm extends EventForm{
     status:EventStatus
@@ -89,8 +85,14 @@ export interface NewEventRequest{
     activityType?:ActivityType,
     budget?:number|null,
     invitees:{contact:string}[],
-    questions:[]
+    questions:NewQuestion[]
 }
+
+export interface NewEventForm extends EventForm {
+  invitees: { contact: string }[];
+  questions: QuestionField[];
+}
+
 
 // משתתף מאושר במפגש
 export interface Participant {
@@ -122,3 +124,4 @@ export interface CreateEventResponse extends EventPageResponse {
 }
 
 export type UpdateEventRequest = Partial<Omit<NewEventRequest, "invitees" | "questions"> & { status: EventStatus }>
+

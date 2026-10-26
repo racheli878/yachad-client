@@ -1,4 +1,5 @@
 import type { EventForm } from "../models/event";
+import type { QuestionField } from "../models/survey";
 
 export const convertEventForm = (data: EventForm) => {
     const dataToSend: EventForm = {
@@ -12,4 +13,11 @@ export const convertEventForm = (data: EventForm) => {
         description: data.description == "" ? null : data.description,
     }
     return dataToSend
+}
+
+export const ConvertQuestionForm=(questions:QuestionField[])=>{
+    return questions.map(q=>({
+        text:q.text.trim(),
+        options:q.options.map(o=>o.text.trim()).filter(t=>t!="")
+    }))
 }

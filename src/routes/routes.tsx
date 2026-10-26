@@ -14,8 +14,9 @@ import Header from "../components/header";
 import GuestOnly from "./guestOnly";
 import Expenses from "../pages/event/expenses/expenses";
 import AllParticipants from "../pages/event/tasks and participants/allParticipants";
-import Survey from "../pages/event/surveyParticipant/survey";
+import Survey from "../pages/event/survey/survey";
 import EventHome from "../pages/event/eventHome";
+import AddQuestion from "../pages/event/survey/addQuestion";
 
 
 
@@ -81,6 +82,11 @@ const routes = createBrowserRouter([
                                     {
                                         path:"participants",
                                         element:<AllParticipants/>
+                                    },
+
+                                    {
+                                        path:"survey/add",
+                                        element:<AddQuestion/>
                                     }
                                 ]
                             },

@@ -5,11 +5,12 @@ import ChangeStatus from "./changeStatus"
 import { toDateTimeLocal } from "../../utils/formatDate"
 import { convertEventForm } from "../../utils/convertEventForm"
 import type { UpdateEventRequest } from "../../models/event"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { updateEvent } from "../../api/eventsApi"
 import getApiError from "../../utils/getApiError"
 import Loading from "../../components/loading"
 import { Link, useNavigate } from "react-router-dom"
+import { getSurveyResults } from "../../api/surveyApi"
 
 const EditDetails = ({ event }: { event: EventDetails }) => {
     const methods = useForm<EditEventForm>({
@@ -60,10 +61,32 @@ const EditDetails = ({ event }: { event: EventDetails }) => {
         mutate({ id: event.id, data: updateData })
     }
 
+    const { data } = useQuery({
+        queryKey: ["surveyOrganizer", event.id],
+        queryFn: () => getSurveyResults(event.id)
+    })
+
+
     return <>
         <FormProvider {...methods}>
             <form className="edit-form" onSubmit={handleSubmit(onsubmit)}>
                 <ChangeStatus event={event} />
+                <div className="edit-survey">
+                    <div className="edit-survey-head">
+                        <h3 className="edit-survey-title">לפי תוצאות הסקר · ענו {data?.respondentsCount} מתוך {data?.participantsCount}</h3>
+                        <Link className="edit-survey-link" to={`/event/${event.id}/survey`}>לתוצאות המלאות</Link>
+                    </div>
+                    <ul className="survey-top-list">
+                        {data&&data.questions.map(q => {
+                            const topOptions = q.options.filter(o => o.isTop)
+                            if (topOptions.length === 0 || q.respondentsCount === 0)
+                                return null
+                            return <li className="survey-top-item" key={q.id}>
+                                <span className="survey-top-chip">{q.text}: {topOptions.map(o => o.text).join(", ")} · {topOptions[0].percentage}%</span>
+                            </li>
+                        })}
+                    </ul>
+                </div>
                 <FormEvent />
                 <Link to={`/event/${event.id}`} className="btn btn-ghost">ביטול</Link>
                 <button className="btn btn-primary btn-lg" type="submit" disabled={isPending}>{isPending ? <div>מעדכן... <Loading /></div> : <div>שמירת השינויים</div>}</button>

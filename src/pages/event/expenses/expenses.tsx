@@ -22,7 +22,7 @@ const Expenses = () => {
     if (isPending)
         return <Loading />
     if (isError)
-        return <div>{getApiError(error).message}</div>
+        return <div className="alert alert-error page-error-inline">{getApiError(error).message}</div>
 
     return <>
         {/* top part */}
