@@ -931,6 +931,49 @@
   .wiz-note-warm { background: var(--color-accent-soft); padding: 18px 22px; border-radius: 22px; }
   .wiz-note-warm::before { background: var(--color-accent-text); width: 26px; height: 26px; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 5h16v11H8l-4 4z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M4 5h16v11H8l-4 4z'/%3E%3C/svg%3E"); }
 
+  /* ----- ניהול משתתפים (לפי Participants.dc.html) ----- */
+  /* שני טורים: הזמנה ורשימת ההזמנות ברחב, המשתתפים המאושרים בצד */
+  .page.parts-page { grid-template-columns: minmax(0, 1fr) minmax(260px, 300px); padding-top: 32px; }
+  .parts-section { min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  @media (max-width: 760px) { .page.parts-page { grid-template-columns: 1fr; } }
+
+  /* טופס ההזמנה: השורה האחרונה, "הוספת משתתף" והשליחה באותה שורה */
+  .parts-invite { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 10px; }
+  .parts-invite::before { content: "הזמנת משתתפים נוספים"; flex-basis: 100%; margin-bottom: 4px; font-size: 22px; font-weight: 800; line-height: 1.15; }
+  .parts-invite > .form-card.invitees { display: contents; }
+  .parts-invite .invitee-row { flex: 1 1 100%; min-width: 0; grid-template-columns: 36px minmax(0, 1fr) auto 44px; }
+  .parts-invite .invitee-row:has(+ .add-row) { flex: 1 1 260px; }
+  .parts-invite .add-row, .parts-send { min-height: 50px; padding: 0 18px; border-radius: 14px; }
+  .parts-send { padding: 0 22px; }
+  .parts-summary, .parts-error { flex-basis: 100%; }
+  .parts-summary { margin-top: 4px; border-radius: 14px; padding: 12px 16px; font-weight: 600; background: var(--color-primary-soft); color: var(--color-primary-text); }
+  .parts-summary-warn { background: var(--color-accent-soft); color: var(--color-ink); }
+  .parts-skip-item { display: block; font-weight: 400; margin-top: 4px; }
+  .parts-error { margin: 0; }
+
+  /* רשימת ההזמנות */
+  .parts-invites { gap: 14px; overflow-x: auto; }
+  .parts-invites-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+  .parts-invites-title { margin: 0; font-size: 22px; }
+  .parts-counts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .parts-counts .tag { font-size: 14px; padding: 4px 10px; }
+  .parts-table { min-width: 520px; }
+  .parts-table th, .parts-table td { text-align: center; }
+  .parts-table td { vertical-align: middle; padding: 13px 12px; }
+  .parts-contact { font-weight: 700; direction: ltr; unicode-bidi: plaintext; }
+  .parts-muted { color: var(--color-muted); }
+  .parts-status { font-weight: 800; font-size: 15px; }
+  .parts-status-accepted { color: var(--color-primary-text); }
+  .parts-status-pending { color: var(--color-accent-text); }
+  .parts-status-declined { color: var(--color-muted); }
+
+  /* המשתתפים המאושרים בטור הצר: הטלפון יורד מתחת לשם */
+  .parts-page .person-row { grid-template-columns: 42px minmax(0, 1fr) auto; column-gap: 12px; }
+  .parts-page .person-avatar { grid-row: span 2; }
+  .parts-page .person-name { grid-column: 2; }
+  .parts-page .person-phone { grid-column: 2; grid-row: 2; font-size: 14px; }
+  .parts-page .person-role { grid-column: 3; grid-row: 1 / span 2; }
+
   /* ---------- 15. טלפון ---------- */
   @media (max-width: 640px) {
     .container-narrow, .app-header-inner, .event-hero-inner { padding-left: 16px; padding-right: 16px; }
@@ -953,5 +996,7 @@
     .wiz-q-option, .wiz-q-add-option, .wiz-q > .wiz-q-error { margin-inline-start: 0; }
     .wiz-q-head > .wiz-q-error { padding-inline-start: 0; }
     .wiz-nav > .btn-ghost { width: 100%; }
+    .parts-invite, .parts-invites { padding: 20px; }
+    .parts-invite .add-row, .parts-send { flex: 1 1 auto; }
   }
 }

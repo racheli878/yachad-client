@@ -1,11 +1,11 @@
-import type { Participant } from "../../models/event"
-import firstLettersOfName from "../../utils/firstLettersOfName"
-import { EventRoleLabels } from "../../utils/labels"
+import type { Participant } from "../../../models/event"
+import firstLettersOfName from "../../../utils/firstLettersOfName"
+import { EventRoleLabels } from "../../../utils/labels"
 
-const Participants = ({ participants }: { participants: Participant[] }) => {
+const Participants = ({ participants,organizer }: { participants: Participant[],organizer:boolean }) => {
 
     return <div className="card event-people">
-        <h2 className="event-people-title">משתתפים · {participants.length}</h2>
+        <h2 className="event-people-title">משתתפים{organizer&&" מאושרים"} · {participants.length}</h2>
         {participants.map(p => {
             return <div className="person-row" key={p.userId}>
                 <span className={`avatar person-avatar avatar-${p.role.toLowerCase()}`}>{firstLettersOfName(p.fullName)}</span>

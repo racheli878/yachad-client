@@ -13,9 +13,9 @@ import Header2 from "../components/header2";
 import Header from "../components/header";
 import GuestOnly from "./guestOnly";
 import Expenses from "../pages/event/expenses/expenses";
-import AllParticipants from "../pages/event/tasks and participants/allParticipants";
+import AllParticipantsPage from "../pages/event/allParticipants/allParticipantsPage";
 import Survey from "../pages/event/survey/survey";
-import EventHome from "../pages/event/eventHome";
+import EventHome from "../pages/event/tasks and participants/eventHome";
 import AddQuestion from "../pages/event/survey/addQuestion";
 
 
@@ -27,7 +27,7 @@ const routes = createBrowserRouter([
 
         children: [
             {
-                element: <GuestOnly/>,
+                element: <GuestOnly />,
                 children: [
                     {
                         element: <Header />,
@@ -52,7 +52,7 @@ const routes = createBrowserRouter([
             },
 
             {
-                element: <Protect/>,
+                element: <Protect />,
                 children: [
                     {
                         element: <Header2 />,
@@ -64,29 +64,29 @@ const routes = createBrowserRouter([
                             {
                                 path: "event/:eventId",
                                 element: <EventPage />,
-                                children:[
+                                children: [
                                     {
-                                        index:true,
-                                        element:<EventHome/>
+                                        index: true,
+                                        element: <EventHome />
                                     },
                                     {
-                                        path:"survey",
-                                        element:<Survey/>
-                                    },
-
-                                    {
-                                        path:"expenses",
-                                        element:<Expenses/>
+                                        path: "survey",
+                                        element: <Survey />
                                     },
 
                                     {
-                                        path:"participants",
-                                        element:<AllParticipants/>
+                                        path: "expenses",
+                                        element: <Expenses />
                                     },
 
                                     {
-                                        path:"survey/add",
-                                        element:<AddQuestion/>
+                                        path: "participants",
+                                        element: <AllParticipantsPage />
+                                    },
+
+                                    {
+                                        path: "survey/add",
+                                        element: <AddQuestion />
                                     }
                                 ]
                             },

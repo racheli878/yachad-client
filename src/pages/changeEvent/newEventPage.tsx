@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import getApiError from "../../utils/getApiError"
 import CreatedEvent from "./CreatedEvent"
 import type { InvitationSummary } from "../../models/invitation"
-import { convertEventForm, ConvertQuestionForm } from "../../utils/convertEventForm"
+import { convertEventForm, convertInvitees, ConvertQuestionForm } from "../../utils/convertEventForm"
 import NewEvent1 from "./newEvent1"
 import NewEvent2 from "./newEvent2"
 import NewEvent3 from "./newEvent3"
@@ -68,7 +68,7 @@ const NewEventPage = () => {
         }
         const dataToSend: NewEventRequest = {
             ...convertEventForm(data),
-            invitees: data.invitees.map(f => ({ contact: f.contact.trim() })).filter(f => f.contact != ""),
+            invitees: convertInvitees(data.invitees),
             questions: ConvertQuestionForm(data.questions)
         }
         mutate(dataToSend)
@@ -99,6 +99,8 @@ const NewEventPage = () => {
             <form className="new-event" onSubmit={handleSubmit(onsubmit)}>
 
                 {step == 0 ? <NewEvent1 /> : step == 1 ? <NewEvent2 /> : <NewEvent3 />}
+
+                {step == 1 && <div className="wiz-note">ההזמנות יישלחו רק בסיום האשף. אפשר להוסיף מוזמנים גם אחר כך, מדף המפגש.</div>}
 
                 <div className="form-actions wiz-nav">
 

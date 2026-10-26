@@ -1,15 +1,15 @@
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form"
 import { checkContactTypes } from "../../utils/contactTypes"
 import { contactLabels } from "../../utils/labels"
-import type { NewEventForm } from "../../models/event"
+import type { InviteesForm } from "../../models/event"
 
 const NewEvent2 = () => {
 
-    const { register, formState: { errors } } = useFormContext<NewEventForm>()
+    const { register, formState: { errors } } = useFormContext<InviteesForm>()
 
-    const { fields, append, remove } = useFieldArray({ name: "invitees" });
+    const { fields, append, remove } = useFieldArray<InviteesForm>({ name: "invitees" });
 
-    const invitees = useWatch({ name: "invitees" });
+    const invitees = useWatch<InviteesForm, "invitees">({name: "invitees"});
 
     return <>
 
@@ -34,7 +34,6 @@ const NewEvent2 = () => {
             <button className="btn btn-dashed add-row" type="button" onClick={() => append({ contact: "" })}> +  הוספת משתתף</button>
         </div>
 
-        <div className="wiz-note">ההזמנות יישלחו רק בסיום האשף. אפשר להוסיף מוזמנים גם אחר כך, מדף המפגש.</div>
 
     </>
 }

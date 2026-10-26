@@ -88,9 +88,8 @@ export interface NewEventRequest{
     questions:NewQuestion[]
 }
 
-export interface NewEventForm extends EventForm {
-  invitees: { contact: string }[];
-  questions: QuestionField[];
+export interface NewEventForm extends EventForm, InviteesForm {
+    questions: QuestionField[];
 }
 
 
@@ -125,3 +124,7 @@ export interface CreateEventResponse extends EventPageResponse {
 
 export type UpdateEventRequest = Partial<Omit<NewEventRequest, "invitees" | "questions"> & { status: EventStatus }>
 
+
+export interface InviteesForm {
+    invitees: { contact: string }[];
+}

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { getEvent } from "../../api/eventsApi"
+import { getEvent } from "../../../api/eventsApi"
 import Participants from "./participants"
-import Tasks from "./tasks and participants/tasks"
+import Tasks from "./tasks"
 import { Link, useParams } from "react-router-dom"
-import getApiError from "../../utils/getApiError"
-import Loading from "../../components/loading"
+import getApiError from "../../../utils/getApiError"
+import Loading from "../../../components/loading"
 
 const EventHome=()=>{
 
@@ -26,7 +26,7 @@ const EventHome=()=>{
 return<>
  <div className="container page event-body">
             <Tasks id={id} />
-            <Participants participants={data.participants} />
+            <Participants participants={data.participants} organizer={false} />
         </div>
 </>
 }
