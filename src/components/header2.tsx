@@ -3,6 +3,7 @@ import {  Link, NavLink, Outlet } from "react-router-dom"
 import { CuserContext } from "../auth/cuserContext"
 import { useQuery } from "@tanstack/react-query"
 import { getMyInvitations } from "../api/invitationsApi"
+import firstLettersOfName from "../utils/firstLettersOfName"
 
 
 const Header2 = () => {
@@ -26,11 +27,13 @@ const Header2 = () => {
                     {/* <div >logo</div> */}
                     <NavLink className="nav-link" to="allEvents">לכל האירועים</NavLink>
                     <NavLink className="nav-link" to="invitations">ההזמנות שלי <span className="badge">{data?.count!=0&&data?.count}</span></NavLink>
+                    <NavLink className="nav-link" to="profile">פרטים אישיים</NavLink>
                 </div>
                 <div className="header-end">
-                    <div className="muted">שלום, {cuser?.fullName}</div>
+                    {/* <div className="muted">שלום, {cuser?.fullName}</div> */}
                     <Link to="/addEvent" className="btn btn-primary">יצירת מפגש</Link>
                     <button className="btn btn-ghost btn-sm" onClick={logOut}>התנתקות</button>
+                    <NavLink aria-label="הפרופיל שלי" to="/profile" className="avatar">{firstLettersOfName(cuser?.fullName)}</NavLink>
                 </div>
 
             </div>

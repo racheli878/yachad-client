@@ -96,7 +96,7 @@ const FormRegister = () => {
                     },
                     maxLength: {
                         value: 72,
-                        message: "סיסמה לא יכולה לכלול יותר מ72 תוים"
+                        message: "סיסמה לא יכולה לכלול מעל 72 תוים"
                     }
                 })}
             /></label>

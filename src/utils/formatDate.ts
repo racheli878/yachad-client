@@ -61,3 +61,13 @@ export const toDateTimeLocal = (iso: string | null): string => {
 
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
 };
+
+export const formatMonthYear = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  return new Intl.DateTimeFormat("he-IL", {
+    month: "long",
+    year: "numeric",
+    timeZone: "Asia/Jerusalem",
+  }).format(date).replace(" ", ", ");
+};

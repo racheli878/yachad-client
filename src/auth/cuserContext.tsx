@@ -12,6 +12,7 @@ interface CuserContextType {
     login: (data: LoginData) => Promise<void>;
     register: (data: RegisterData) => Promise<void>;
     logOut: () => void;
+    edit:(data:User)=>void
 }
 
 export const CuserContext = createContext<CuserContextType>({
@@ -19,7 +20,8 @@ export const CuserContext = createContext<CuserContextType>({
     loading: false,
     login: async () => { },
     register: async () => { },
-    logOut: () => { }
+    logOut: () => { },
+    edit:()=>{}
 })
 
 const CuserProvider = ({ children }: { children: ReactNode }) => {
@@ -45,6 +47,10 @@ const CuserProvider = ({ children }: { children: ReactNode }) => {
         setCuser(null)
     }
 
+        const edit = (data:User) => {
+        setCuser(data)
+    }
+
     useEffect(() => {
         const checkUser = async () => {
             const token = localStorage.getItem("token")
@@ -66,7 +72,7 @@ const CuserProvider = ({ children }: { children: ReactNode }) => {
 
 
 
-    return <CuserContext.Provider value={{ cuser, loading, login, register, logOut }}>
+    return <CuserContext.Provider value={{ cuser, loading, login, register, logOut,edit }}>
         {children}
     </CuserContext.Provider>
 }

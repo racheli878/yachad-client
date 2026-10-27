@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import Participants from "../tasks and participants/participants"
+import Participants from "../tasksAndParticipants/participants"
 import { Link, useParams } from "react-router-dom"
 import { getEvent } from "../../../api/eventsApi"
 import Loading from "../../../components/loading"

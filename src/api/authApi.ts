@@ -1,5 +1,5 @@
 import type LoginData from "../models/loginData";
-import type UserAndToken from "../models/userAndToken";
+import {type UserAndToken} from "../models/userModel";
 import api from "./generalAxios";
 import type RegisterData from "../models/registerData";
 import type User from "../models/userModel";

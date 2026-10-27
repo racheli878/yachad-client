@@ -11,7 +11,7 @@ const Protect = () => {
         return <Loading/>
     if (cuser)
         return <Outlet />
-    return <Navigate to={"/login"} replace />
+    return <Navigate to={"/"} replace />
 }
 
 export default Protect

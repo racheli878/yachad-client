@@ -4,6 +4,7 @@ export default interface User {
     fullName: string,
     email: string,
     phone: string,
+    createdAt: string
 }
 
 export interface UserForTransfer {
@@ -12,7 +13,23 @@ export interface UserForTransfer {
     phone: string
 }
 
-export interface PartUser{
-    id:number,
-    fullName:string
+export interface PartUser {
+    id: number,
+    fullName: string
+}
+
+export interface UserAndToken {
+    token: string,
+    user: User
+}
+
+export interface EditProfile {
+    fullName?: string,
+    email?: string,
+    phone?: string,
+}
+
+export interface EditPass{
+    currentPassword:string,
+    newPassword:string
 }

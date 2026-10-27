@@ -974,6 +974,93 @@
   .parts-page .person-phone { grid-column: 2; grid-row: 2; font-size: 14px; }
   .parts-page .person-role { grid-column: 3; grid-row: 1 / span 2; }
 
+  /* ----- דף נחיתה (לפי MainB.dc.html – "דף נחיתה – גרסה ב") ----- */
+  /* כל אזור ברוחב מלא, והתוכן בפנים עד 1200px */
+  .landing-top, .landing-hero, .landing-how, .landing-cta-box { padding-inline: max(40px, calc((100% - 1200px) / 2)); }
+  .landing-top { background: var(--color-surface); border-bottom: 1px solid var(--color-line); padding-block: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  /* הלוגו: סימן + שם, בלי אלמנט נוסף */
+  .landing-top::before { content: "MeetUs"; margin-inline-end: auto; min-height: 40px; display: flex; align-items: center; padding-inline-start: 50px; font-family: var(--font-display); font-size: 28px; color: var(--color-ink); background: url('/meetus-mark.svg') right center / 40px 40px no-repeat; }
+  .landing-login { padding: 10px 20px; }
+
+  .landing-hero { padding-block: 72px 64px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px; }
+  .landing-text { flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+  .landing-eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 3px; color: var(--color-muted); }
+  .landing-title { margin: 0; font-size: clamp(44px, 6vw, 72px); line-height: 1.05; max-width: 9ch; }
+  .landing-lead { margin: 0; font-size: 21px; line-height: 1.6; color: var(--color-muted); max-width: 540px; }
+  .landing-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* הדוגמה: מסגרת קטנה ומסומנת, שלושה כרטיסים מדורגים */
+  .landing-demo { flex: 2 1 340px; min-width: 0; max-width: 440px; background: #e9efeb; border-radius: 28px; padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .landing-demo-label { align-self: flex-start; display: flex; align-items: center; gap: 6px; background: var(--color-surface); color: var(--color-muted); font-weight: 700; font-size: 13px; padding: 5px 12px; border-radius: var(--radius-full); border: 1px dashed #9aaea8; }
+  .landing-demo-label::before { content: ""; width: 15px; height: 15px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .landing-demo-card { box-sizing: border-box; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 18px; box-shadow: 0 6px 18px rgba(20, 48, 43, .08); display: grid; align-items: center; gap: 6px 14px; }
+  .landing-demo-title { margin: 0; font-weight: 800; font-size: 16px; color: var(--color-ink); }
+  .landing-demo-event { align-self: flex-start; width: 88%; padding: 16px 18px; grid-template-columns: 52px minmax(0, 1fr); }
+  .landing-demo-date { grid-row: span 2; width: 52px; height: 52px; border-radius: 14px; background: var(--color-ink); color: #fff; font-size: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .landing-demo-date > span { font-family: var(--font-display); font-size: 20px; line-height: 1; }
+  .landing-demo-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .landing-demo-tags .tag { font-size: 12px; padding: 2px 9px; }
+  .landing-demo-task { align-self: flex-end; width: 70%; margin-top: -4px; padding: 14px 16px; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; }
+  .landing-demo-kicker { grid-column: 1 / -1; margin: 0; font-size: 12px; font-weight: 600; color: var(--color-muted); }
+  .landing-demo-task .landing-demo-title { font-size: 15px; }
+  .landing-demo-btn { background: var(--color-primary); color: #fff; font-weight: 700; font-size: 12px; padding: 5px 12px; border-radius: var(--radius-full); white-space: nowrap; }
+  .landing-demo-settle { align-self: flex-start; width: 62%; margin-top: -4px; padding: 12px 14px; grid-template-columns: 34px minmax(0, 1fr); gap: 0 10px; }
+  .landing-demo-icon { grid-row: span 2; width: 34px; height: 34px; border-radius: 10px; background: var(--color-accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a4b00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center / 18px no-repeat; }
+  .landing-demo-settle .landing-demo-title { font-size: 14px; }
+  .landing-demo-sub { margin: 0; font-size: 13px; color: var(--color-muted); }
+  .landing-demo-note { margin: 2px 0 0; font-size: 13px; text-align: center; color: var(--color-muted); }
+
+  /* איך זה עובד – פס לבן ברוחב מלא */
+  .landing-how { background: var(--color-surface); border-block: 1px solid var(--color-line); padding-block: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; scroll-margin-top: 0; }
+  .landing-how-title { grid-column: 1 / -1; margin: 0 0 16px; font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 40px); }
+  .landing-step { background: var(--color-bg); border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
+  .landing-step-num { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1; color: var(--color-primary); }
+  .landing-step-title { margin: 0; font-size: 22px; font-weight: 800; }
+  .landing-step > p { margin: 0; color: var(--color-muted); line-height: 1.6; }
+
+  /* קריאה לפעולה – כרטיס כהה. הרקע מצויר ב־::before כדי שהריפוד הצדדי יישאר כמו בשאר האזורים */
+  .landing-cta-box { position: relative; isolation: isolate; margin-block: 64px 80px; padding-block: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .landing-cta-box::before { content: ""; position: absolute; z-index: -1; inset: 0 max(40px, calc((100% - 1200px) / 2)); background: var(--color-ink); border-radius: 32px; }
+  .landing-cta-box { padding-inline: calc(max(40px, calc((100% - 1200px) / 2)) + 48px); }
+  .landing-cta-text { flex: 1 1 380px; display: flex; flex-direction: column; gap: 10px; }
+  .landing-cta-title { margin: 0; font-size: clamp(28px, 3.5vw, 38px); color: #fff; }
+  .landing-cta-text > p { margin: 0; font-size: 18px; color: var(--color-muted-on-dark); }
+
+  /* ---------- מסך הפרופיל ---------- */
+  .profile-head, .profile-card { width: min(820px, 100% - 80px); margin-inline: auto; }
+  .profile-head { margin-top: 40px; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 20px; align-items: center; }
+  .profile-avatar { grid-row: 1 / 3; }
+  .profile-head > h1 { margin: 0; align-self: end; font-family: var(--font-display); font-size: 40px; font-weight: 400; line-height: 1.15; }
+  .profile-since { margin: 2px 0 0; align-self: start; }
+  .profile-card { margin-top: 24px; gap: 18px; }
+  .profile-head ~ :last-child { margin-bottom: 64px; }
+  .profile-card-head > h2 { margin: 0; font-size: 22px; }
+  .profile-card-head > p { margin: 4px 0 0; }
+  .profile-form { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; }
+  .profile-form > div:has(> .field) { flex: 1 1 240px; min-width: 0; }
+  .profile-form .field { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: 8px; row-gap: 6px; }
+  .profile-form .field > .input, .profile-form .field > .field-error { grid-column: 1 / -1; }
+  .profile-form .field-hint { margin: 0; }
+  .profile-form .input[dir='ltr'] { text-align: right; }
+  .profile-form > div:has(> .field) { display: flex; flex-direction: column; gap: 6px; }
+  .profile-form > div:has(.field-error) .input { border: 2px solid var(--color-danger); }
+  .profile-card > h2 { margin: 0; font-size: 22px; }
+  .profile-form::before { content: ""; order: 1; flex-basis: 100%; margin-top: -16px; }
+  .profile-form > :not(:has(> .field)) { order: 2; }
+  .profile-saved { align-self: center; color: var(--color-primary-text); font-weight: 700; }
+  .profile-save { margin-inline-start: auto; padding-inline: 28px; }
+  .profile-error { flex-basis: 100%; }
+  .profile-note { padding: 12px 16px; border-radius: var(--radius-field); font-size: 15px; }
+  /* העיגול בכותרת: צהוב, ומסגרת כהה כשנמצאים בדף הפרופיל */
+  .header-end > .avatar { background: var(--color-accent); color: var(--color-ink); }
+  .header-end > .avatar[aria-current='page'] { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .profile-head, .profile-card { width: calc(100% - 32px); }
+    .profile-head { margin-top: 28px; }
+    .profile-head > h1 { font-size: 32px; }
+    .profile-save { width: 100%; }
+  }
+
   /* ---------- 15. טלפון ---------- */
   @media (max-width: 640px) {
     .container-narrow, .app-header-inner, .event-hero-inner { padding-left: 16px; padding-right: 16px; }
@@ -996,6 +1083,17 @@
     .wiz-q-option, .wiz-q-add-option, .wiz-q > .wiz-q-error { margin-inline-start: 0; }
     .wiz-q-head > .wiz-q-error { padding-inline-start: 0; }
     .wiz-nav > .btn-ghost { width: 100%; }
+    .landing-top, .landing-hero, .landing-how { padding-inline: 16px; }
+    .landing-top { padding-block: 14px; gap: 8px; }
+    .landing-top::before { font-size: 20px; padding-inline-start: 40px; background-size: 32px 32px; }
+    .landing-top > .btn { padding: 8px 14px; min-height: 40px; font-size: 15px; }
+    .landing-hero { padding-block: 40px; gap: 36px; }
+    .landing-actions > .btn { flex: 1 1 auto; }
+    .landing-demo-event, .landing-demo-task, .landing-demo-settle { width: 100%; }
+    .landing-how { padding-block: 44px; }
+    .landing-cta-box { margin-block: 40px 56px; padding: 32px 40px; }
+    .landing-cta-box::before { inset: 0 16px; border-radius: 24px; }
+    .landing-cta-box > .btn { width: 100%; }
     .parts-invite, .parts-invites { padding: 20px; }
     .parts-invite .add-row, .parts-send { flex: 1 1 auto; }
   }

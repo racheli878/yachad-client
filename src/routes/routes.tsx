@@ -15,8 +15,10 @@ import GuestOnly from "./guestOnly";
 import Expenses from "../pages/event/expenses/expenses";
 import AllParticipantsPage from "../pages/event/allParticipants/allParticipantsPage";
 import Survey from "../pages/event/survey/survey";
-import EventHome from "../pages/event/tasks and participants/eventHome";
+import EventHome from "../pages/event/tasksAndParticipants/eventHome";
 import AddQuestion from "../pages/event/survey/addQuestion";
+import LandingPage from "../pages/landingPage";
+import ProfilePage from "../pages/profile/profilePage";
 
 
 
@@ -34,7 +36,7 @@ const routes = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <LoginPage />
+                                element: <LandingPage />
                             },
 
                             {
@@ -101,6 +103,10 @@ const routes = createBrowserRouter([
                             {
                                 path: "invitations",
                                 element: <InvitationsPage />
+                            },
+                            {
+                                path: "profile",
+                                element: <ProfilePage />
                             }
                         ]
                     }
