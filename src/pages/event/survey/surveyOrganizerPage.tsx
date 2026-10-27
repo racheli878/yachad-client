@@ -3,6 +3,7 @@ import { getSurveyResults } from "../../../api/surveyApi"
 import { Link, useParams } from "react-router-dom"
 import Loading from "../../../components/loading"
 import getApiError from "../../../utils/getApiError"
+import type React from "react"
 
 const SurveyOrganizerPage = () => {
     const { eventId } = useParams()
@@ -19,12 +20,12 @@ const SurveyOrganizerPage = () => {
 
     return <>
     <div className="survey-res-actions">
-        <Link to={`/event/${id}/survey/add`} className="btn btn-outline survey-add-q">+ הוספת שאלה</Link>
+        <Link to={`/event/${id}/survey/add`} className="btn btn-outline survey-add-q">+ הוספת שאלות</Link>
         <Link to={`/event/${id}/edit`} className="btn btn-primary survey-set-details">קביעת פרטים לפי הרוב</Link>
     </div>
         <div className="survey-res-top">
             <div className="card survey-rate">
-                <span className="survey-rate-num">{data.responseRate}%</span>
+                <span className="survey-rate-num" style={{"--pct":data.responseRate} as React.CSSProperties}>{data.responseRate}%</span>
                 <h3 className="survey-rate-title">ענו {data.respondentsCount} מתוך {data.participantsCount}</h3>
                 {data.notResponded.length != 0 && <p className="survey-rate-missing">עוד לא ענו: {data.notResponded.map(u => u.fullName).join(", ")}</p>}
             </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import SurveyParticipantPage from "./surveyParticipantPage"
 import { useQuery } from "@tanstack/react-query"
 import { getEvent } from "../../../api/eventsApi"
@@ -14,8 +14,9 @@ const Survey=()=>{
           queryKey: ["event", id],
           queryFn: () => getEvent(id)
       })
-      const [showRes,setShowRes]=useState(false)
-  
+      const location=useLocation()
+      const [showRes,setShowRes]=useState<boolean>(location.state?.showRes??false)
+
 return<>
 {data?.event.myRole=="ORGANIZER"&&<div className="survey-toggle">
     <button className="survey-toggle-btn" aria-pressed={!showRes} onClick={()=>setShowRes(false)}>התשובות שלי</button>

@@ -1,4 +1,4 @@
-import { type SurveyResults, type AnswersParticipant, type SurveyParticipant, type NewQuestion } from "../models/survey"
+import { type SurveyResults, type AnswersParticipant, type SurveyParticipant, type NewQuestion, type QuestionResults } from "../models/survey"
 import api from "./generalAxios"
 
 export const getMySurvey = async (id: number) => {
@@ -18,5 +18,10 @@ export const getSurveyResults=async(id:number)=>{
 
 export const InitQustions=async()=>{
     const res=await api.get<{ questions: NewQuestion[] }>(`/survey/default-questions`)
+    return res.data
+}
+
+export const addQuestion=async({id,data}:{id:number,data:NewQuestion})=>{
+    const res=await api.post<{question:QuestionResults}>(`/events/${id}/survey/questions`,data)
     return res.data
 }

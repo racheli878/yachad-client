@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext } from "react-hook-form"
 import type { NewEventForm } from "../../models/event"
 import { validateOptions } from "../../utils/contactTypes";
 
-const QusetionCard = ({ index, funcDel }: { index: number, funcDel: () => void }) => {
+const QusetionCard = ({ index, funcDel,numFrom }: { index: number, funcDel: () => void ,numFrom?: number}) => {
 
     const { register, formState: { errors },control } = useFormContext<NewEventForm>()
 
@@ -11,7 +11,7 @@ const QusetionCard = ({ index, funcDel }: { index: number, funcDel: () => void }
 
     return <div className="wiz-q">
         <div className="wiz-q-head">
-            <span className="wiz-q-num">{index+1}</span>
+            <span className="wiz-q-num">{index+(numFrom ?? 1)}</span>
             <input className="wiz-q-text" {...register(`questions.${index}.text`,{required:"יש להזין את נוסח השאלה"})} />
             {errors.questions?.[index]?.text&&<div className="field-error wiz-q-error">{errors.questions?.[index]?.text.message}</div>}
             <button className="icon-btn wiz-q-del" onClick={funcDel} type="button">delete</button>

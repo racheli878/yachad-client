@@ -82,7 +82,7 @@ const EditDetails = ({ event }: { event: EventDetails }) => {
                             if (topOptions.length === 0 || q.respondentsCount === 0)
                                 return null
                             return <li className="survey-top-item" key={q.id}>
-                                <span className="survey-top-chip">{q.text}: {topOptions.map(o => o.text).join(", ")} · {topOptions[0].percentage}%</span>
+                                <span className="survey-top-chip">{q.text} {topOptions.map(o => o.text).join(" | ")} · {topOptions[0].percentage}%</span>
                             </li>
                         })}
                     </ul>

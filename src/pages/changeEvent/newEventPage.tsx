@@ -101,6 +101,7 @@ const NewEventPage = () => {
                 {step == 0 ? <NewEvent1 /> : step == 1 ? <NewEvent2 /> : <NewEvent3 />}
 
                 {step == 1 && <div className="wiz-note">ההזמנות יישלחו רק בסיום האשף. אפשר להוסיף מוזמנים גם אחר כך, מדף המפגש.</div>}
+                   {step==2&&<div className="wiz-note wiz-note-warm">בסוף כל סקר יופיע שדה חופשי – כל משתתף יוכל לכתוב לך הערה. רק המארגנים רואים את ההערות.</div>}
 
                 <div className="form-actions wiz-nav">
 
