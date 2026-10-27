@@ -1,7 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import Participants from "../tasksAndParticipants/participants"
-import { Link, useParams } from "react-router-dom"
-import { getEvent } from "../../../api/eventsApi"
+import { useParams } from "react-router-dom"
 import Loading from "../../../components/loading"
 import getApiError from "../../../utils/getApiError"
 import { FormProvider, useForm } from "react-hook-form"
@@ -12,16 +11,15 @@ import { convertInvitees } from "../../../utils/convertEventForm"
 import { useState } from "react"
 import type { AddInvitationsResponse } from "../../../models/invitation"
 import InvitationList from "./invitationList"
+import useEvent from "../../../utils/useEvent"
+import PageError from "../../../components/pageError"
 
 const AllParticipantsPage = () => {
     const { eventId } = useParams()
     const id = Number(eventId)
 
     const [summaryAdd,setSummaryAdd]=useState<AddInvitationsResponse | null>(null)
-    const { data, isError, error, isPending } = useQuery({
-        queryKey: ["event", id],
-        queryFn: () => getEvent(id)
-    })
+    const { data, isError, error, isPending } = useEvent(id)
     const methods = useForm<InviteesForm>({
         defaultValues: { invitees: [{ contact: "" }] }
     })
@@ -42,11 +40,7 @@ const queryClient=useQueryClient()
         return <Loading />
 
     if (isError)
-        return <div className="page-error">
-            <p className="page-error-msg">{getApiError(error).message}</p>
-            <Link className="btn btn-ghost" to="/allEvents">חזרה לכל האירועים</Link>
-        </div>
-
+        return <PageError error={error}/>
 
 
 

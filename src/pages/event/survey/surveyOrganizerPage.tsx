@@ -54,7 +54,6 @@ const SurveyOrganizerPage = () => {
                             <h4 className="survey-res-opt-text">{o.text} {o.isTop && "★ מוביל"}</h4>
                             <p className="survey-res-opt-votes">{o.votes} קולות · {o.percentage}%</p>
                         </div>
-                        {/* פס התקדמות */}
                         <div data-top={o.isTop} className="survey-res-fill" style={{width:`${o.percentage}%`}}></div>
                         {o.voters.length == 0 ? <p className="survey-res-voters">אף אחד עדיין</p> : <p className="survey-res-voters">{o.voters.map(u => u.fullName).join(", ")}</p>}
                     </li>)}

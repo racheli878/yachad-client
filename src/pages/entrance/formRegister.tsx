@@ -37,7 +37,6 @@ const FormRegister = () => {
             <input className="input" type="text"
                 aria-invalid={!!errors.fullName}
 
-                // placeholder="שם ומשפחה"
                 {...register("fullName", {
                     required: "יש להזין שם מלא",
                     minLength: { value: 2, message: "שם חייב להיות לפחות באורך של 2 אותיות" },
@@ -52,7 +51,6 @@ const FormRegister = () => {
             <input className="input" type="email"
                 aria-invalid={!!errors.email}
 
-                // placeholder="מייל"
                 {...register("email", {
                     required: "יש להזין מייל",
                     pattern: {
@@ -69,7 +67,6 @@ const FormRegister = () => {
             <input className="input" type="tel"
                 aria-invalid={!!errors.phone}
 
-                // placeholder="טלפון"
                 {...register("phone", {
                     required: "יש להזין מספר טלפון",
                     pattern: {
@@ -85,7 +82,6 @@ const FormRegister = () => {
             <label htmlFor="password">סיסמה
             <input className="input" type="password"
                 aria-invalid={!!errors.password}
-                // placeholder="סיסמה"
                 {...register("password", {
                     required: "יש להזין סיסמה",
                     pattern: {
@@ -104,7 +100,6 @@ const FormRegister = () => {
             /></label>
             {errors.password && <div className="field-error">{errors.password.message}</div>}
         </div>
-        {/* {errors.root.details&&} */}
 
         {errors.root && <div className="alert alert-error">{errors.root.message}</div>}
 

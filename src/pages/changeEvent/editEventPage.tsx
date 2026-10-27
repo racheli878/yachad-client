@@ -1,26 +1,19 @@
-import { useQuery } from "@tanstack/react-query"
-import { Link, useParams } from "react-router-dom"
-import { getEvent } from "../../api/eventsApi"
+import { useParams } from "react-router-dom"
 import Loading from "../../components/loading"
-import getApiError from "../../utils/getApiError"
 import EditDetails from "./editDetails"
+import useEvent from "../../utils/useEvent"
+import PageError from "../../components/pageError"
 
 const EditEventPage = () => {
     const { eventId } = useParams()
     const id = Number(eventId)
-    const { data, isError, error, isPending } = useQuery({
-        queryKey: ["event", id],
-        queryFn: () => getEvent(id)
-    })
+    const { data, isError, error, isPending } = useEvent(id)
 
     if (isPending)
         return <Loading />
 
     if (isError)
-        return <div className="page-error">
-            <p className="page-error-msg">{getApiError(error).message}</p>
-            <Link className="btn btn-ghost" to="/allEvents">חזרה לכל האירועים</Link>
-        </div>
+        return <PageError error={error}/>
 
     return <>
         <div className="page-head edit-head">

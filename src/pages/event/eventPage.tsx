@@ -1,27 +1,28 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Link, NavLink, Outlet, useNavigate, useParams } from "react-router-dom"
-import { deleteEvent, getEvent, leavingEvent } from "../../api/eventsApi"
+import { deleteEvent, leavingEvent } from "../../api/eventsApi"
 import getApiError from "../../utils/getApiError"
 import Loading from "../../components/loading"
 import { formatDate } from "../../utils/formatDate"
 import { activityTypeLabels, categoryLabels, EventStatusLabels } from "../../utils/labels"
+import { useState } from "react"
+import ConfirmModal from "../../components/confirmModal"
+import useEvent from "../../utils/useEvent"
+import PageError from "../../components/pageError"
 
 const EventPage = () => {
 
     const { eventId } = useParams()
     const id = Number(eventId)
-    const { data, isPending, isError, error } = useQuery({
-        queryKey: ["event", id],
-        queryFn: () => getEvent(id)
-    })
+    const { data, isPending, isError, error } = useEvent(id)
+    const [askDelete, setAskDelete] = useState(false)
+    const [askLeave, setAskLeave] = useState(false)
 
     const clearEvent = () => {
-        if (confirm("למחוק את המפגש? הוא יימחק לצמיתות אצל כל המשתתפים, כולל הסקר וההוצאות ללא אפשרות שחזור. ניתן לחילופין לשנות את הסטטוס ל'בוטל' במסך העריכה"))
-            mutate(id)
+        setAskDelete(true)
     }
     const leaveEvent = () => {
-        if (confirm("בטוח שברצונכם לעזוב את המפגש?"))
-            leaveMutate(id)
+        setAskLeave(true)
     }
     const queryClient = useQueryClient()
     const navigate = useNavigate()
@@ -44,14 +45,10 @@ const EventPage = () => {
         return <Loading />
 
     if (isError)
-        return <div className="page-error">
-            <p className="page-error-msg">{getApiError(error).message}</p>
-            <Link className="btn btn-ghost" to="/allEvents">חזרה לכל האירועים</Link>
-        </div>
+        return <PageError error={error}/>
 
     return <>
         <div className="event-hero">
-            {/* the head part */}
             <div className="event-hero-head">
                 <div className="event-hero-tags">
                     <span className="tag tag-solid">{data?.event.status && EventStatusLabels[data?.event.status]}</span>
@@ -65,16 +62,18 @@ const EventPage = () => {
             {data?.event.myRole == "ORGANIZER" ? <div className="event-hero-actions">
                 <Link className="btn btn-light" to="edit">עריכת פרטים</Link>
                 <button className="btn btn-outline-light" disabled={isDeleting} onClick={clearEvent}>{isDeleting ? <>מוחק...<Loading /></> : "מחיקת מפגש"}</button>
+                {askDelete && <ConfirmModal onCancel={() => setAskDelete(false)} onConfirm={() => { mutate(id); setAskDelete(false) }}
+                    confirmText="מחיקה" text="למחוק את המפגש? הוא יימחק לצמיתות אצל כל המשתתפים, כולל הסקר וההוצאות ללא אפשרות שחזור. ניתן לחילופין לשנות את הסטטוס ל'בוטל' במסך העריכה" title="מחיקת מפגש" />}
                 {cannotDel && <div className="alert alert-error">{getApiError(notDel).message}</div>}
             </div> : <button className="btn btn-outline-light" disabled={isLeaving} onClick={leaveEvent}>{isLeaving ? <div>עוזב... <Loading /></div> : <div>עזיבת המפגש</div>}</button>}
+            {askLeave && <ConfirmModal onCancel={() => setAskLeave(false)} onConfirm={() => { leaveMutate(id); setAskLeave(false) }} confirmText="עזיבה" text="בטוח שברצונכם לעזוב את המפגש?" title="עזיבת מפגש" />}
             {connotLeave && <div className="alert alert-error">{getApiError(dontLeave).message}</div>}
             {/* details */}
             <div className="info-tiles">
-                {/* <div className="info-tile"><p className="info-tile-label">מתי</p><p className="info-tile-value">{data?.event.eventDate ? formatDate(data?.event.eventDate) : "עדיין לא נקבע תאריך"}</p></div> */}
                 <div className="info-tile"><p className="info-tile-label">מתי</p><p className="info-tile-value">
                     {data?.event.eventDate ? <>
-                    <span className="info-tile-day">{formatDate(data.event.eventDate).split(" · ")[0]}</span>
-                    <span className="info-tile-time">{formatDate(data.event.eventDate).split(" · ")[1]}</span>
+                        <span className="info-tile-day">{formatDate(data.event.eventDate).split(" · ")[0]}</span>
+                        <span className="info-tile-time">{formatDate(data.event.eventDate).split(" · ")[1]}</span>
                     </>
                         : "עדיין לא נקבע תאריך"}</p></div>
                 <div className="info-tile"><p className="info-tile-label">איפה</p><p className="info-tile-value">{data?.event.location ? data?.event.location : "עדיין לא נקבע מקום"}</p></div>

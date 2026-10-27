@@ -14,8 +14,6 @@ const Participants = ({ participants,organizer }: { participants: Participant[],
                 <span className={`tag tag-${p.role.toLowerCase()} person-role`}>{EventRoleLabels[p.role]}</span>
             </div>
         })}
-        {/* רק המנהל רואה את זה אז אין עניין אם יש גם לשונית לניהול המשתתפים */}
-       {/* {<Link className="event-people-invite" to="/">+ הזמנת משתתפים</Link>} */}
     </div>
 
 }

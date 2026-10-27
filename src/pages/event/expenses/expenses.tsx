@@ -17,7 +17,7 @@ const Expenses = () => {
         queryFn: () => getExpenses(id)
     })
 
-    const denominator=data?.budget&&!data.isOverBudget?data.budget:data?.total??1
+    const denominator = data?.budget && !data.isOverBudget ? data.budget : data?.total ?? 1
 
     if (isPending)
         return <Loading />
@@ -29,29 +29,26 @@ const Expenses = () => {
         <div className="container page expenses-page">
             <p className="exp-sum-label">סך ההוצאות</p>
             <h2 className="exp-sum-total">{data.total} ₪</h2>
-            {data.budget!=null && <>
+            {data.budget != null && <>
                 <p className="exp-sum-budget">מתוך תקציב {data.budget} ₪</p>
-                {data.isOverBudget?<div className="exp-sum-side exp-over">שימו לב! חריגה מהתקציב</div>:
-                 <div className="exp-sum-side">
-                    <p className="exp-remaining">נשארו {data.remaining} ₪</p>
-                    <p className="exp-percent">{data.percentUsed}% מהתקציב</p>
-                </div> }
+                {data.isOverBudget ? <div className="exp-sum-side exp-over">שימו לב! חריגה מהתקציב</div> :
+                    <div className="exp-sum-side">
+                        <p className="exp-remaining">נשארו {data.remaining} ₪</p>
+                        <p className="exp-percent">{data.percentUsed}% מהתקציב</p>
+                    </div>}
             </>}
-            {/* פס התקדמות */}
             <div className="bar exp-bar">
-                {data.byParticipant.map(p=><div key={p.userId} className="bar-fill" style={{width:`${p.total==0?0:p.total/denominator*100}%`}}></div>)}
-                </div>
-                {!data.expenses.length&&<div className="exp-empty">עדיין אין הוצאות</div>}
+                {data.byParticipant.map(p => <div key={p.userId} className="bar-fill" style={{ width: `${p.total == 0 ? 0 : p.total / denominator * 100}%` }}></div>)}
+            </div>
+            {!data.expenses.length && <div className="exp-empty">עדיין אין הוצאות</div>}
             <div className="exp-legend">
                 {data.byParticipant.map(p => <div className="exp-legend-item" key={p.userId}>
                     <span className="exp-legend-dot">{firstLettersOfName(p.fullName)}</span>
                     <p>{p.fullName} · {p.total} ₪</p>
                 </div>)}
             </div>
-            {/* end top part */}
-
-                    <ExpensesDetails expenses={data.expenses} id={id}/>
-<Calculations/>
+            <ExpensesDetails expenses={data.expenses} id={id} />
+            <Calculations />
         </div>
     </>
 }

@@ -8,6 +8,7 @@ import Loading from "../../../components/loading"
 import ExpenseFields from "./expenseFields"
 import EditExpense from "./editExpens"
 import getApiError from "../../../utils/getApiError"
+import ConfirmModal from "../../../components/confirmModal"
 
 const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) => {
 
@@ -34,12 +35,8 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
     const onsubmit = (data: LittleExpense) => {
         mutate({ id, data })
     }
-
-    const delExpence = (e: Expense) => {
-        if (confirm("למחוק את ההוצאה?"))
-            deleteExp({ eventId: id, expenseId: e.id })
-    }
-
+    const [askDelete,setAskDelete]=useState<number|null>(null)
+   
     const [edit, setEdit] = useState(-1)
 
     return <div className="card exp-list-card">
@@ -62,12 +59,12 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
                         <p className="exp-who">{e.paidBy.fullName} {e.isMine && " (אני) "}</p>
                     </div>
                 </div>
-
                 <div className="exp-row-side">
                     {e.id != edit ? <>
                         <p className="exp-amount">{e.amount} ₪</p>
                         {e.isMine && <button className="icon-btn exp-edit-btn" aria-label="עריכת ההוצאה" onClick={() => setEdit(e.id)}>edit</button>}
-                        {e.isMine && <button className="icon-btn exp-del-btn" aria-label="מחיקת ההוצאה" onClick={() => delExpence(e)} disabled={pendingDelExp}>{pendingDelExp && variables.expenseId == e.id ? <>מוחק...<Loading /></> : "מחיקה"}</button>}
+                        {e.isMine && <button className="icon-btn exp-del-btn" aria-label="מחיקת ההוצאה" onClick={() => setAskDelete(e.id)} disabled={pendingDelExp}>{pendingDelExp && variables.expenseId == e.id ? <>מוחק...<Loading /></> : "מחיקה"}</button>}
+                        
                         {isErrorDelExp && variables.expenseId == e.id && <div className="alert alert-error exp-row-error">{getApiError(errorDelExp).message}</div>}
                     </> : <>
                         <EditExpense eventId={id} expense={e} finish={() => setEdit(-1)} />
@@ -75,6 +72,8 @@ const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) 
                 </div>
             </li>)}
         </ul>
+        {askDelete&&<ConfirmModal onConfirm={()=> {deleteExp({ eventId: id, expenseId: askDelete }); setAskDelete(null)}} onCancel={()=>setAskDelete(null)}
+                           text="למחוק את ההוצאה?" confirmText="מחיקה" title="מחיקת הוצאה"/>}
     </div>
 }
 

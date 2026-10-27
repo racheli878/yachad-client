@@ -29,14 +29,12 @@ const Tasks = ({ id }: { id: number }) => {
         <div className="event-tasks-list">
             {!data?.tasks || data.tasks.length == 0 ? <div className="event-tasks-empty">עדיין אין תפקידים</div> :
                 data?.tasks.map(t => <div className="task-row" key={t.id}>
-                    {/* //תפקיד שכבר נלקח */}
                     {t.isTaken ?
                         <>
                             <span className="avatar task-avatar">{firstLettersOfName(t.assignee?.fullName)}</span>
                             <span className="task-title">{t.description}</span>
                             <span className="task-who">{t.assignee?.fullName} {t.isMine && " (אני)"}</span>
                             {t.isMine && <TaskAction eventId={id} taskId={t.id} text="ויתור" func={releaseTask} />}
-                            {/* תפקיד שנלקח לא בעריכה */}
                         </> : t.id != edit ?
                             <>
                                 <span className="avatar task-avatar task-avatar-free">?</span>
@@ -48,7 +46,6 @@ const Tasks = ({ id }: { id: number }) => {
                                         <TaskAction eventId={id} taskId={t.id} text="מחיקה" func={deleteTask} />
                                         <button className="icon-btn task-icon" onClick={() => { setEdit(t.id) }}>edit</button>
                                     </>}
-                                {/* מצב עריכה  */}
                             </> : <>
                                 <span className="avatar task-avatar task-avatar-free">?</span>
                                 <EditTask eventId={id} task={t} finishEdit={() => { setEdit(-1) }} />

@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import getApiError from "../../../utils/getApiError"
 import Loading from "../../../components/loading"
+import { useState } from "react"
+import ConfirmModal from "../../../components/confirmModal"
 
 const TaskAction = ({ eventId, taskId, text, func }: { eventId: number, taskId: number, text: string, func: (data: { eventId: number, taskId: number }) => Promise<unknown> }) => {
 
@@ -15,11 +17,11 @@ const TaskAction = ({ eventId, taskId, text, func }: { eventId: number, taskId: 
             queryClient.invalidateQueries({ queryKey: ["event", eventId] })
         }
     })
+    const [askDelete,setAskDelete]=useState(false)
 
     const action = () => {
         if (text == "מחיקה") {
-            if (confirm("למחוק את התפקיד?"))
-                mutate({ eventId: eventId, taskId: taskId })
+            setAskDelete(true)
         }
         else
             mutate({ eventId: eventId, taskId: taskId })
@@ -27,6 +29,8 @@ const TaskAction = ({ eventId, taskId, text, func }: { eventId: number, taskId: 
 
     return <>
         <button className="btn task-btn" disabled={isPending} onClick={action}>{isPending && <Loading />}{text}</button>
+        {askDelete&&<ConfirmModal onConfirm={()=>{mutate({ eventId: eventId, taskId: taskId }); setAskDelete(false)}} onCancel={()=>setAskDelete(false)}
+            confirmText="מחיקה" text="למחוק את התפקיד?" title="מחיקת תפקיד"/>}
         {isError && <div className="alert alert-error task-error">{getApiError(error).message}</div>}
     </>
 

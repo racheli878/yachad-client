@@ -16,7 +16,6 @@ const LandingPage = () => {
                     <a className="btn btn-outline btn-lg" href="#how">איך זה עובד </a>
                 </div>
             </div>
-            {/* instance */}
             <div className="landing-demo">
                 <div className="landing-demo-label">כך זה נראה · לדוגמה</div>
                 <div className="landing-demo-card landing-demo-event">

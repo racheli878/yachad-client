@@ -31,7 +31,6 @@ const Header2 = () => {
                     <NavLink className="nav-link" to="profile">פרטים אישיים</NavLink>
                 </div>
                 <div className="header-end">
-                    {/* <div className="muted">שלום, {cuser?.fullName}</div> */}
                     <Link to="/addEvent" className="btn btn-primary">יצירת מפגש</Link>
                     <button className="btn btn-ghost btn-sm" onClick={logOut}>התנתקות</button>
                     <NavLink aria-label="הפרופיל שלי" to="/profile" className="avatar">{firstLettersOfName(cuser?.fullName)}</NavLink>
