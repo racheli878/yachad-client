@@ -1,19 +1,15 @@
 import { useLocation, useParams } from "react-router-dom"
 import SurveyParticipantPage from "./surveyParticipantPage"
-import { useQuery } from "@tanstack/react-query"
-import { getEvent } from "../../../api/eventsApi"
 import { useState } from "react"
 import SurveyOrganizerPage from "./surveyOrganizerPage"
+import useEvent from "../../../utils/useEvent"
 
 const Survey=()=>{
 
     const {eventId}=useParams()
     const id=Number(eventId)
   
-      const { data } = useQuery({
-          queryKey: ["event", id],
-          queryFn: () => getEvent(id)
-      })
+      const { data } = useEvent(id)
       const location=useLocation()
       const [showRes,setShowRes]=useState<boolean>(location.state?.showRes??false)
 

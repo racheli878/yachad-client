@@ -3,8 +3,8 @@ import EntranceSide from "./entranceSide"
 import { Link, NavLink } from "react-router-dom"
 
 
-const Auth=({title,subtitle,children,footerText,footerLinkText,tooterLinkTo: footerLinkTo}:
-    {title:string,subtitle:string,children:ReactNode,footerText:string,footerLinkText:string,tooterLinkTo:string})=>{
+const Auth=({title,subtitle,children,footerText,footerLinkText,footerLinkTo: footerLinkTo}:
+    {title:string,subtitle:string,children:ReactNode,footerText:string,footerLinkText:string,footerLinkTo:string})=>{
 
     return  <div className="auth-layout">
         <EntranceSide />

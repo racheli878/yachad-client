@@ -1,17 +1,13 @@
 import { useState } from "react"
-import { getEvent } from "../../../api/eventsApi"
 import EditTask from "./editTask";
-import { useQuery } from "@tanstack/react-query";
 import CreateTask from "./createTask";
 import TaskAction from "./taskAction";
 import { deleteTask, releaseTask, takeTask } from "../../../api/tasks";
 import firstLettersOfName from "../../../utils/firstLettersOfName";
+import useEvent from "../../../utils/useEvent";
 const Tasks = ({ id }: { id: number }) => {
 
-    const { data } = useQuery({
-        queryKey: ["event", id],
-        queryFn: () => getEvent(id)
-    })
+    const { data } = useEvent(id)
 
 
     const [edit, setEdit] = useState(-1)
