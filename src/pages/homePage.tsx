@@ -35,7 +35,7 @@ const HomePage = () => {
             <div className="home-stat home-stat-money">
                 <p className="home-stat-label">מגיע לי</p>
                 <span className="home-stat-num">{data.money.totalToReceive.toFixed(2)} ₪</span>
-                <p className="home-stat-sub">מ{data.money.toReceive.length} העברות · לשלם: {data.money.totalToPay.toFixed(2)} ₪</p>
+                <p className="home-stat-sub">מ {data.money.toReceive.length} העברות · לשלם: {data.money.totalToPay.toFixed(2)} ₪</p>
             </div>
         </div>
 

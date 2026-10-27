@@ -68,7 +68,7 @@ const InvitationCard = ({ invitation }: { invitation: Invitation }) => {
             <h2 className="invite-title">{invitation.event.title}</h2>
             <p className="invite-from">הוזמנת ע"י {invitation.invitedBy.fullName} · {invitation.event.participantsCount} כבר אשרו</p>
             <div className="invite-meta invite-place">{invitation.event.location ? invitation.event.location : "עדיין לא נקבע מקום"}</div>
-            <div className="invite-meta invite-budget">תקציב {invitation.event.budget != null ? invitation.event.budget + "₪" : "עדיין לא נקבע תקציב"}</div>
+            <div className="invite-meta invite-budget">תקציב:  {invitation.event.budget != null ? invitation.event.budget + "₪" : "עדיין לא נקבע תקציב"}</div>
             <button className="btn btn-primary" disabled={isPending} onClick={() => mutate(invitation.id)}>{isPending ? <><div>טוען...</div><Loading /></> : "רוצה להשתתף"}</button>
             {isError&&<div>{getApiError(error).message}</div>}
             <button className="btn btn-ghost" disabled={isDeslining} onClick={() => declineInvitation(invitation.id)}>{isDeslining ? <><div>טוען...</div><Loading /></> : "לא הפעם"}</button>

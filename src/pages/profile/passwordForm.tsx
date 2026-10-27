@@ -7,7 +7,7 @@ import getApiError from "../../utils/getApiError"
 
 const PasswordForm = () => {
     const { register, handleSubmit, formState: { errors }, reset,setError} = useForm<EditPass>({
-        mode: "onBlur"
+        mode: "onTouched"
     })
 
     const { mutate, isPending, isSuccess,data } = useMutation({

@@ -14,7 +14,7 @@ import { getSurveyResults } from "../../api/surveyApi"
 
 const EditDetails = ({ event }: { event: EventDetails }) => {
     const methods = useForm<EditEventForm>({
-        mode: "onBlur",
+        mode: "onTouched",
         defaultValues: {
             activityType: event.activityType,
             budget: event.budget,

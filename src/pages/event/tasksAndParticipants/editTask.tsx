@@ -7,7 +7,7 @@ import getApiError from "../../../utils/getApiError";
 
 const EditTask = ({ eventId, task, finishEdit }: { eventId: number, task: Task, finishEdit: () => void }) => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<{ description: string }>({ mode: "onBlur" })
+    const { register, handleSubmit, formState: { errors } } = useForm<{ description: string }>({ mode: "onTouched" })
     const queryClient = useQueryClient()
     const { mutate, isPending: isEditting,isError,error } = useMutation({
         mutationFn: editTask,

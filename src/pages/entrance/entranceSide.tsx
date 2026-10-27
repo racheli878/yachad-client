@@ -4,7 +4,7 @@ const EntranceSide = () => {
     return <aside className="auth-side">
         <div className="auth-logo">
             <span className="auth-logo-mark"></span>
-            <span className="auth-logo-text">MeetUs</span>
+            <span className="auth-logo-text">Meet<span className="logo-us">Us</span></span>
         </div>
         <div className="auth-intro">
             <h1 className="auth-title">יש לכם הזמנה?</h1>

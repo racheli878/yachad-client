@@ -17,7 +17,7 @@ const AddQuestion = () => {
         queryFn: () => getSurveyResults(id)
     })
     const methods = useForm<Pick<NewEventForm, "questions">>({
-        mode: "onBlur",
+        mode: "onTouched",
         defaultValues: {
             questions: [{ text: "", options: [{ text: "" }, { text: "" }] }]
         }

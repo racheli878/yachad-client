@@ -7,7 +7,7 @@ import Loading from "../../components/loading";
 
 const FormLogin = () => {
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<LoginData>({ mode: "onBlur" });
+    const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<LoginData>({ mode: "onTouched" });
     const { login } = useContext(CuserContext)
 
     const onSubmit = async (data: LoginData) => {

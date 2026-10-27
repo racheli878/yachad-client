@@ -13,7 +13,7 @@ const ProfileDetailsForm = ({ user }: { user: User }) => {
 
     const { edit } = useContext(CuserContext)
     const { register, handleSubmit, formState: { errors, dirtyFields, isDirty }, reset, setError } = useForm<EditProfile>({
-        mode: "onBlur",
+        mode: "onTouched",
         defaultValues: user
     })
 

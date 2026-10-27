@@ -9,7 +9,7 @@ import ExpenseFields from "./expenseFields"
 const EditExpense = ({ eventId, expense,finish }: { eventId: number, expense: Expense,finish:()=>void }) => {
 
     const methods = useForm<LittleExpense>({
-        mode: "onBlur",
+        mode: "onTouched",
         defaultValues: {
             amount: expense.amount,
             reason: expense.reason

@@ -51,6 +51,7 @@ export const formatDate = (dateString: string): string => {
   }).format(date);
 
   return `${fullDate} · ${time}`;
+  // return `${fullDate} · ${time}`;
 };
 
 export const toDateTimeLocal = (iso: string | null): string => {

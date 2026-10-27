@@ -1,32 +1,100 @@
-# React + TypeScript + Vite
+# MeetUs – ארגון מפגשים משותפים (צד לקוח)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+אפליקציית React לארגון מפגשים בקבוצה: יוצרים מפגש, מזמינים משתתפים, עושים סקר לבחירת פרטים, מחלקים תפקידים ומנהלים הוצאות משותפות עם התחשבנות.
 
-Currently, two official plugins are available:
+- **האתר באוויר:** https://meetus-client.onrender.com
+- **השרת (API):** https://yachad-backend-0y9k.onrender.com
+- **תיעוד ה־API (Swagger):** https://yachad-backend-0y9k.onrender.com/api-docs
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> השרת רץ במסלול החינמי של Render, ולכן אחרי זמן ללא שימוש הוא "נרדם". הכניסה הראשונה יכולה לקחת עד דקה.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## מה אפשר לעשות במערכת
 
-## Expanding the Oxlint configuration
+**כל משתמש:**
+- הרשמה, התחברות ויציאה.
+- דף בית עם סיכום: מפגשים קרובים, הזמנות שמחכות לתשובה, וכמה כסף צריך לשלם או לקבל.
+- רשימת המפגשים שלי.
+- הזמנות: אישור או דחייה של הזמנה למפגש.
+- מענה על סקר המפגש.
+- תפקידים: לקיחת תפקיד פנוי, או ויתור על תפקיד שלקחתי.
+- הוצאות: הוספה, עריכה ומחיקה של הוצאות שלי, וצפייה בהתחשבנות.
+- מסך פרופיל: עדכון פרטים אישיים ושינוי סיסמה.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+**מארגן/ת המפגש:**
+- יצירת מפגש באשף בשלושה שלבים: פרטים, מוזמנים ושאלות סקר.
+- עריכת פרטי המפגש ושינוי הסטטוס שלו (בתכנון, נקבע, הסתיים, בוטל).
+- צפייה בתוצאות הסקר והוספת שאלות.
+- יצירה, עריכה ומחיקה של תפקידים.
+- ניהול משתתפים ושליחת הזמנות נוספות.
+- מחיקת המפגש.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+**הרשאות:** ההרשאות נבדקות גם בשרת. משתתף לא רואה פעולות של מארגן, ומי שלא חבר במפגש לא יכול לראות אותו.
+
+---
+
+## טכנולוגיות
+
+- React 19 + TypeScript
+- Vite
+- React Router
+- React Query (TanStack Query) – שליפת נתונים ושמירה במטמון
+- React Hook Form – טפסים ולידציה
+- Axios – תקשורת עם השרת, כולל שליחת JWT בכותרת `Authorization: Bearer`
+- Tailwind CSS + CSS מותאם
+
+---
+
+## הרצה במחשב
+
+דרישות: Node.js בגרסת LTS.
+
+1. מתקינים את התלויות:
+   ```
+   npm install
+   ```
+2. יוצרים בתיקייה הראשית קובץ בשם `.env` עם השורה:
+   ```
+   VITE_API_URL=https://yachad-backend-0y9k.onrender.com
+   ```
+   (אם השרת רץ במחשב, שמים כאן את הכתובת המקומית שלו.)
+3. מפעילים:
+   ```
+   npm run dev
+   ```
+4. פותחים בדפדפן את `http://localhost:5173`.
+
+### פקודות נוספות
+
+| פקודה | מה היא עושה |
+|---|---|
+| `npm run dev` | הרצה לפיתוח |
+| `npm run build` | בדיקת TypeScript ובניית גרסה סופית לתיקייה `dist` |
+| `npm run preview` | הצגה של הגרסה הבנויה |
+
+---
+
+## מבנה התיקיות (עיקרי)
+
+```
+src/
+  api/          פונקציות שפונות לשרת (Axios)
+  models/       טיפוסי TypeScript של הנתונים
+  pages/        המסכים (מפגשים, מפגש, הזמנות, פרופיל, דף בית ועוד)
+  components/   רכיבים משותפים (כותרות, הגנה על נתיבים ועוד)
+  utils/        פונקציות עזר (תאריכים, שגיאות, המרות)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## פריסה (Render – Static Site)
+
+| הגדרה | ערך |
+|---|---|
+| Build Command | `npm ci && npm run build` |
+| Publish Directory | `dist` |
+| משתנה סביבה | `VITE_API_URL=https://yachad-backend-0y9k.onrender.com` |
+| Rewrite | `/*` → `/index.html` (כדי שרענון בכל דף יעבוד) |
+
+בשרת, במשתנה `CORS_ORIGIN`, מופיעה כתובת האתר `https://meetus-client.onrender.com` כדי שהשרת יקבל ממנו בקשות.

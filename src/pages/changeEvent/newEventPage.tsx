@@ -19,7 +19,7 @@ const NewEventPage = () => {
     const [step, setStep] = useState<0 | 1 | 2>(0)
 
     const methods = useForm<NewEventForm>({
-        mode: "onBlur",
+        mode: "onTouched",
         defaultValues: {
             invitees: [{ contact: "" }],
             category: "OTHER",

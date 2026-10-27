@@ -46,7 +46,7 @@ const AllEventsPage = () => {
 
         </div>
         {data?.events.length == 0 && <div className="empty empty-page">
-           {search!=""? <><h2 className="empty-title">לא נמצאו מפגשים</h2> <p>נסו חיפוש אחר או פתחו מפגש חדש</p> </> :
+           {debouncedSearch!=""||isMyOrganize? <><h2 className="empty-title">לא נמצאו מפגשים</h2> <p>נסו חיפוש אחר או פתחו מפגש חדש</p> </> :
             <><h2 className="empty-title">עדיין אין לכם מפגשים</h2> <p>זה בדיוק הזמן ליצור מפגש חדש!</p> </>
            }<Link to="/addEvent" className="btn btn-primary">לחצו ליצירת מפגש</Link></div>}
     </div>

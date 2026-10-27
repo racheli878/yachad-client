@@ -7,7 +7,9 @@ import Loading from "../../components/loading"
 
 const FormRegister = () => {
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<RegisterData>({ mode: "onBlur" })
+    const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm<RegisterData>({
+         mode: "onTouched"
+         })
     const { register: registerFunc } = useContext(CuserContext)
 
     const onSubmit = async (data: RegisterData) => {

@@ -11,7 +11,7 @@ import getApiError from "../../../utils/getApiError"
 
 const ExpensesDetails = ({ expenses, id }: { expenses: Expense[], id: number }) => {
 
-    const methods = useForm<LittleExpense>({ mode: "onBlur" })
+    const methods = useForm<LittleExpense>({ mode: "onTouched" })
     const { handleSubmit, reset } = methods
     const queryClient = useQueryClient()
     const { mutate, isPending, isError, error } = useMutation({
