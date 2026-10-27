@@ -19,12 +19,13 @@ const Header2 = () => {
         <header className="app-header">
             <div className="app-header-inner">
                 <div className="header-start">
-                    <Link className="logo" to="/allEvents">
+                    <Link className="logo" to="/home">
                         <span className="logo-mark"></span>
                         <span className="logo-text">MeetUs</span>
                     </Link>
 
                     {/* <div >logo</div> */}
+                    <NavLink className="nav-link" to="home">דף הבית</NavLink>
                     <NavLink className="nav-link" to="allEvents">לכל האירועים</NavLink>
                     <NavLink className="nav-link" to="invitations">ההזמנות שלי <span className="badge">{data?.count!=0&&data?.count}</span></NavLink>
                     <NavLink className="nav-link" to="profile">פרטים אישיים</NavLink>

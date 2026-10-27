@@ -19,6 +19,7 @@ import EventHome from "../pages/event/tasksAndParticipants/eventHome";
 import AddQuestion from "../pages/event/survey/addQuestion";
 import LandingPage from "../pages/landingPage";
 import ProfilePage from "../pages/profile/profilePage";
+import HomePage from "../pages/homePage";
 
 
 
@@ -62,6 +63,10 @@ const routes = createBrowserRouter([
                             {
                                 path: "allEvents",
                                 element: <AllEventsPage />
+                            },
+                            {
+                                path: "home",
+                                element: <HomePage />
                             },
                             {
                                 path: "event/:eventId",

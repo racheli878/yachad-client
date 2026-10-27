@@ -71,3 +71,31 @@ export const formatMonthYear = (dateString: string): string => {
     timeZone: "Asia/Jerusalem",
   }).format(date).replace(" ", ", ");
 };
+
+export const formatDayDate = (dateString: string): string => {
+    const date = new Date(dateString);
+
+    return new Intl.DateTimeFormat("he-IL", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        timeZone: "Asia/Jerusalem"
+    }).format(date);
+};
+export const formatDay = (dateString: string | null): string => {
+    if (!dateString) return "";
+
+    return new Intl.DateTimeFormat("he-IL", {
+        day: "numeric",
+        timeZone: "Asia/Jerusalem"
+    }).format(new Date(dateString));
+};
+
+export const formatMonth = (dateString: string | null): string => {
+    if (!dateString) return "";
+
+    return new Intl.DateTimeFormat("he-IL", {
+        month: "short",
+        timeZone: "Asia/Jerusalem"
+    }).format(new Date(dateString));
+};

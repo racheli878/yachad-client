@@ -12,7 +12,7 @@ const GuestOnly = () => {
     if (loading)
         return <Loading/>
     if (cuser != null)
-        return <Navigate to={"/allEvents"} replace />
+        return <Navigate to={"/home"} replace />
     return <Outlet />
 }
 export default GuestOnly
